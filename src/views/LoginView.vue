@@ -28,10 +28,10 @@
 
 <script>
 import Logo from "@/components/Logo";
-import UsernameInput from "@/components/UsernameInput";
-import PasswordInput from "@/components/PasswordInput";
-import LoginButton from "@/components/LoginButton";
-import RegisterButton from "@/components/RegisterButton";
+import UsernameInput from "@/components/inputs/UsernameInput";
+import PasswordInput from "@/components/inputs/PasswordInput";
+import LoginButton from "@/components/buttons/LoginButton";
+import RegisterButton from "@/components/buttons/RegisterButton";
 
 export default {
   name: "LoginView",
