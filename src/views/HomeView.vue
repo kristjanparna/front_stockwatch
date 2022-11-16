@@ -1,18 +1,17 @@
 <template>
+  <div>
 
-  <div class="container align-items-center">
+    <Logo/>
 
-    <div class="row align-items-center">
-      <div class="col">
-        <img class="img-fluid col-6" alt="Logo" src="../assets/logo-no-background.png">
-      </div>
-    </div>
   </div>
 
 </template>
 
 <script>
+import Logo from "@/components/Logo";
+
 export default {
-  name: "HomeView"
+  name: "HomeView",
+  components: {Logo}
 }
 </script>
