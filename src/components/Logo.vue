@@ -1,10 +1,6 @@
 <template>
-  <div class="container align-items-center">
-    <div class="row align-items-center">
-      <div class="col">
-        <img class="img-fluid col-6 mt-3" alt="Logo" src="../assets/logo-no-background.png">
-      </div>
-    </div>
+  <div>
+    <img class="img-fluid col-6 mt-3" alt="Logo" src="../assets/logo-no-background.png">
   </div>
 </template>
 <script>

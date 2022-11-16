@@ -1,8 +1,10 @@
 <template>
-  <div>
-
-    <Logo/>
-
+  <div class="container justify-content-center">
+    <div class="row align-items-center">
+      <div class="col">
+        <Logo/>
+      </div>
+    </div>
   </div>
 
 </template>
