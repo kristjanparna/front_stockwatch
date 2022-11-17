@@ -12,7 +12,7 @@
     <PasswordInput/>
 
     <div class="mt-4">
-      <LoginButton/>
+        <LoginButton/>
     </div>
 
     <div class="mt-4">

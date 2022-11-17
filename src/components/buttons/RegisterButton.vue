@@ -1,12 +1,18 @@
 <template>
   <div>
-    <button type="button" class="btn btn-outline-dark col-lg-2">
-      <router-link to="/register">Registreeri</router-link>
-    </button>
+    <router-link to="/register">
+      <button type="button" class="btn btn-dark col-lg-2">
+        Registreeri
+      </button>
+    </router-link>
+
   </div>
 </template>
 <script>
+import Logo from "@/components/Logo";
+
 export default {
-  name: 'RegisterButton'
+  name: 'RegisterButton',
+  components: {Logo}
 }
 </script>
