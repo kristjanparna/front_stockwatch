@@ -1,23 +1,73 @@
 <template>
-  <div>
-   <div>
-     <Logo/>
-   </div>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <Logo/>
+      </div>
+    </div>
 
-    <FirstNameInput/>
+    <div class="mt-5 offset-3 input-group">
+      <div class="col-lg-2">
+        <span class="input-group-text justify-content-center" id="basic-addon1">Eesnimi</span>
+      </div>
+      <div class="col-lg-4">
+        <input v-model="firstName" type="text" class="form-control justify-content-center" placeholder="Raibert">
+      </div>
+    </div>
 
-    <LastNameInput/>
+    <div class="mt-1 offset-3 input-group">
+      <div class="col-lg-2">
+        <span class="input-group-text justify-content-center" id="basic-addon1">Perekonnanimi</span>
+      </div>
+      <div class="col-lg-4">
+        <input v-model="lastname" type="text" class="form-control justify-content-center" placeholder="Rebane">
+      </div>
+    </div>
 
-    <EmailInput/>
+    <div class="mt-1 offset-3 input-group">
+      <div class="col-lg-2">
+        <span class="input-group-text justify-content-center" id="basic-addon1">Email</span>
+      </div>
+      <div class="col-lg-4">
+        <input v-model="email" type="text" class="form-control justify-content-center" placeholder="Raibert@neti.ee">
+      </div>
+    </div>
 
-    <UsernameInput/>
+    <div class="offset-3 input-group">
+      <div class="col-lg-2 mt-1">
+        <span class="input-group-text justify-content-center" id="basic-addon1">Kasutajanimi</span>
+      </div>
+      <div class="col-lg-4 mt-1">
+        <input v-model="username" type="text" class="form-control justify-content-center" placeholder="AwesomeUser1">
+      </div>
+    </div>
 
-    <PasswordInput/>
+    <div class="mt-1 offset-3 input-group">
+      <div class="col-lg-2">
+        <span class="input-group-text justify-content-center" id="basic-addon1">Salasõna</span>
+      </div>
+      <div class="col-lg-4">
+        <input  v-model="password" type="password" class="form-control justify-content-center" placeholder="SecretPassword1">
+      </div>
+    </div>
 
-    <PasswordConfirmationInput/>
+    <div class="mt-1 offset-3 input-group">
+      <div class="col-lg-2">
+        <span class="input-group-text justify-content-center" id="basic-addon1">Korda salasõna</span>
+      </div>
+      <div class="col-lg-4">
+        <input v-model="passwordConfirmation" type="password" class="form-control justify-content-center" placeholder="SecretPassword1">
+      </div>
+    </div>
+
+    <div class="mt-1 offset-3 input-group">
+      <div class="col-lg-6">
+        <ErrorAlert :message="errorMessage"/>
+      </div>
+    </div>
 
     <div class="mt-4">
-      <RegisterButton/>
+      <button v-on:click="checkAllFields" type="button" class="btn btn-dark col-lg-2">Registreeri</button>
     </div>
 
   </div>
@@ -32,11 +82,39 @@ import LastNameInput from "@/components/inputs/LastNameInput";
 import EmailInput from "@/components/inputs/EmailInput";
 import PasswordConfirmationInput from "@/components/inputs/PasswordConfirmationInput";
 import Logo from "@/components/Logo";
+import ErrorAlert from "@/views/ErrorAlert";
 
 export default {
   name: "RegisterView",
   components: {
     PasswordConfirmationInput,
-    EmailInput, LastNameInput, FirstNameInput, UsernameInput, PasswordInput, RegisterButton, Logo}
+    EmailInput, LastNameInput, FirstNameInput, UsernameInput, PasswordInput, RegisterButton, Logo, ErrorAlert
+  },
+  data: function () {
+    return {
+      firstName: '',
+      lastname: '',
+      email: '',
+      username: '',
+      password: '',
+      passwordConfirmation: '',
+      errorMessage: ''
+    }
+  },
+  methods: {
+    checkAllFields() {
+      this.errorMessage = ''
+
+      if (this.firstName.length === 0 || this.lastname.length === 0 ||
+          this.email.length === 0 || this.username.length === 0 ||
+          this.password.length === 0 || this.passwordConfirmation.length === 0) {
+        this.errorMessage = 'Palun täida kõik väljad'
+      } else if (!this.email.includes('@') || !this.email.includes('.')) {
+        this.errorMessage = 'Palun kontrolli meiliaadressi'
+      } else if (this.password !== this.passwordConfirmation) {
+        this.errorMessage = 'Salasõnad ei kattu'
+      }
+    },
+  }
 }
 </script>
