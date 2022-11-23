@@ -16,8 +16,6 @@
       </div>
     </div>
 
-    <div>{{ username }}</div>
-
     <div class="mt-1 offset-3 input-group">
       <div class="col-lg-2">
         <span class="input-group-text justify-content-center" id="basic-addon1">Salasõna</span>
@@ -27,8 +25,6 @@
                placeholder="SecretPassword1">
       </div>
     </div>
-
-    <div>{{ password }}</div>
 
     <div class="mt-1 offset-3 input-group">
       <div class="col-lg-6">
@@ -64,7 +60,10 @@ export default {
     return {
       username: '',
       password: '',
-      errorMessage: '',
+      error:{
+        message: '',
+        errorCode: '',
+      },
 
       //TODO: Back-endis tuleb sõnumi struktuuri muuta - hetkel me saame tagasi
       //TODO: userId, username ja password aga peaks olema ainult userId ja roll
@@ -77,10 +76,10 @@ export default {
   },
   methods: {
     login: function () {
-      this.errorMessage = ''
+      this.error.message = ''
 
       if (this.username.length === 0 || this.password.length === 0) {
-        this.errorMessage = 'Palun täida kõik väljad';
+        this.error.message = 'Palun täida kõik väljad';
       } else {
         this.$http.get("/login", {
               params: {
@@ -101,6 +100,8 @@ export default {
             this.$router.push({name: 'adminViewRoute'})
           }
         }).catch(error => {
+
+          //TODO: Kui sellist kasutajat ei leita, tuleb siin visata alert
           console.log(error)
         })
       }
