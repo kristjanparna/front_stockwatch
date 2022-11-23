@@ -47,7 +47,8 @@
         <span class="input-group-text justify-content-center" id="basic-addon1">Salasõna</span>
       </div>
       <div class="col-lg-4">
-        <input  v-model="password" type="password" class="form-control justify-content-center" placeholder="SecretPassword1">
+        <input v-model="password" type="password" class="form-control justify-content-center"
+               placeholder="SecretPassword1">
       </div>
     </div>
 
@@ -56,7 +57,8 @@
         <span class="input-group-text justify-content-center" id="basic-addon1">Korda salasõna</span>
       </div>
       <div class="col-lg-4">
-        <input v-model="passwordConfirmation" type="password" class="form-control justify-content-center" placeholder="SecretPassword1">
+        <input v-model="passwordConfirmation" type="password" class="form-control justify-content-center"
+               placeholder="SecretPassword1">
       </div>
     </div>
 
@@ -77,18 +79,13 @@
 import UsernameInput from "@/components/inputs/UsernameInput";
 import PasswordInput from "@/components/inputs/PasswordInput";
 import RegisterButton from "@/components/buttons/RegisterButton";
-import FirstNameInput from "@/components/inputs/FirstNameInput";
-import LastNameInput from "@/components/inputs/LastNameInput";
-import EmailInput from "@/components/inputs/EmailInput";
-import PasswordConfirmationInput from "@/components/inputs/PasswordConfirmationInput";
 import Logo from "@/components/Logo";
-import ErrorAlert from "@/views/ErrorAlert";
+import ErrorAlert from "@/components/ErrorAlert";
 
 export default {
   name: "RegisterView",
   components: {
-    PasswordConfirmationInput,
-    EmailInput, LastNameInput, FirstNameInput, UsernameInput, PasswordInput, RegisterButton, Logo, ErrorAlert
+    UsernameInput, PasswordInput, RegisterButton, Logo, ErrorAlert
   },
   data: function () {
     return {

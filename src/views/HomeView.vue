@@ -37,7 +37,7 @@ import UsernameInput from "@/components/inputs/UsernameInput";
 import PasswordInput from "@/components/inputs/PasswordInput";
 import LoginButton from "@/components/buttons/LoginButton";
 import RegisterButton from "@/components/buttons/RegisterButton";
-import ErrorAlert from "@/views/ErrorAlert";
+import ErrorAlert from "@/components/ErrorAlert";
 
 export default {
   name: "HomeView",

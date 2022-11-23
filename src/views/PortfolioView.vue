@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import Navbar from "@/views/Navbar";
+import Navbar from "@/components/Navbar";
 export default {
   name: "PortfolioView",
   components: {Navbar}
