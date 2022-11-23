@@ -1,25 +1,43 @@
 <template>
 
   <div class="container">
-    <div class="row">
+    <div class="row mt-xl-5">
       <div class="col">
         <Logo/>
       </div>
     </div>
 
-    <UsernameInput v-model="username"/>
+    <div class="offset-3 input-group">
+      <div class="col-lg-2 mt-1">
+        <span class="input-group-text justify-content-center" id="basic-addon1">Kasutajanimi</span>
+      </div>
+      <div class="col-lg-4 mt-1">
+        <input v-model="username" type="text" class="form-control justify-content-center" placeholder="AwesomeUser1">
+      </div>
+    </div>
 
-    <PasswordInput v-model="password"/>
+    <div>{{ username }}</div>
+
+    <div class="mt-1 offset-3 input-group">
+      <div class="col-lg-2">
+        <span class="input-group-text justify-content-center" id="basic-addon1">Salasõna</span>
+      </div>
+      <div class="col-lg-4">
+        <input v-model="password" type="password" class="form-control justify-content-center"
+               placeholder="SecretPassword1">
+      </div>
+    </div>
+
+    <div>{{ password }}</div>
 
     <div class="mt-1 offset-3 input-group">
       <div class="col-lg-6">
-      <ErrorAlert :message="errorMessage"/>
+        <ErrorAlert :message="errorMessage"/>
+      </div>
     </div>
-    </div>
-
 
     <div class="mt-4">
-    <button v-on:click="login" type="button" class="btn btn-dark col-lg-2">Logi sisse</button>
+      <button v-on:click="login" type="button" class="btn btn-dark col-lg-2">Logi sisse</button>
     </div>
 
     <div class="mt-4 row">
@@ -47,11 +65,13 @@ export default {
       username: '',
       password: '',
       errorMessage: '',
+
+      //TODO: Back-endis tuleb sõnumi struktuuri muuta - hetkel me saame tagasi
+      //TODO: userId, username ja password aga peaks olema ainult userId ja roll
       loginInfo: {
-        userId: '',
-        roles: {
-          roleName: ''
-        }
+        id: '',
+        username: '',
+        password: '',
       }
     }
   },
@@ -60,7 +80,29 @@ export default {
       this.errorMessage = ''
 
       if (this.username.length === 0 || this.password.length === 0) {
-        this.errorMessage = 'Palun täida kõik väljad'
+        this.errorMessage = 'Palun täida kõik väljad';
+      } else {
+        this.$http.get("/login", {
+              params: {
+                username: this.username,
+                password: this.password
+              }
+            }
+        ).then(response => {
+          this.loginInfo = response.data;
+          sessionStorage.setItem('userId', this.loginInfo.id);
+
+          // TODO: Siin tuleb loginInfo.id vahetada role'i vastu
+          if (this.loginInfo.id !== 1) {
+            this.$router.push({name: 'watchListRoute'});
+          } else {
+
+            // TODO: Sellist route'i pole veel olemas
+            this.$router.push({name: 'adminViewRoute'})
+          }
+        }).catch(error => {
+          console.log(error)
+        })
       }
     },
   }

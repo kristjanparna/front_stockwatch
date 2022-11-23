@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="row">
+    <div class="row mt-xl-5">
       <div class="col">
         <Logo/>
       </div>
