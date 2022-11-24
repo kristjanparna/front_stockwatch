@@ -21,14 +21,14 @@
         <span class="input-group-text justify-content-center" id="basic-addon1">Salasõna</span>
       </div>
       <div class="col-lg-4">
-        <input v-model="password" type="password" class="form-control justify-content-center"
+        <input v-model="password" v-on:keyup.enter="login" type="password" class="form-control justify-content-center"
                placeholder="SecretPassword1">
       </div>
     </div>
 
     <div class="mt-1 offset-3 input-group">
       <div class="col-lg-6">
-        <ErrorAlert :message="errorMessage"/>
+        <ErrorAlert :message="error.message"/>
       </div>
     </div>
 
@@ -99,10 +99,9 @@ export default {
             // TODO: Sellist route'i pole veel olemas
             this.$router.push({name: 'adminViewRoute'})
           }
-        }).catch(error => {
 
-          //TODO: Kui sellist kasutajat ei leita, tuleb siin visata alert
-          console.log(error)
+        }).catch(error => {
+          this.error.message = error.response.data.message
         })
       }
     },

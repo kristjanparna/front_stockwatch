@@ -57,7 +57,7 @@
         <span class="input-group-text justify-content-center" id="basic-addon1">Korda salasõna</span>
       </div>
       <div class="col-lg-4">
-        <input v-model="passwordConfirmation" type="password" class="form-control justify-content-center"
+        <input v-model="passwordConfirmation" v-on:keyup.enter="validateInputs"  type="password" class="form-control justify-content-center"
                placeholder="SecretPassword1">
       </div>
     </div>
@@ -69,7 +69,7 @@
     </div>
 
     <div class="mt-4">
-      <button v-on:click="checkAllFields" type="button" class="btn btn-dark col-lg-2">Registreeri</button>
+      <button v-on:click="validateInputs" type="button" class="btn btn-dark col-lg-2">Registreeri</button>
     </div>
 
   </div>
@@ -99,7 +99,7 @@ export default {
     }
   },
   methods: {
-    checkAllFields() {
+    validateInputs() {
       this.errorMessage = ''
 
       if (this.firstName.length === 0 || this.lastname.length === 0 ||
