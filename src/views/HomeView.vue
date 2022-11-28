@@ -70,7 +70,8 @@ export default {
       //TODO: userId, username ja password aga peaks olema ainult userId ja roll
       loginInfo: {
         userId: '',
-        roleId: ''
+        roleId: '',
+        username: ''
       }
     }
   },
@@ -89,6 +90,7 @@ export default {
         this.loginInfo = response.data;
         sessionStorage.setItem('userId', this.loginInfo.userId);
         sessionStorage.setItem('roleId', this.loginInfo.roleId);
+        sessionStorage.setItem('username', this.loginInfo.username);
         if (this.loginInfo.roleId !== 1) {
           this.$router.push({name: 'watchListRoute'});
         } else {
