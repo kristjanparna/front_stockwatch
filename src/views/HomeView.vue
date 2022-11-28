@@ -94,7 +94,7 @@ export default {
         if (this.loginInfo.roleId !== 1) {
           this.$router.push({name: 'watchListRoute'});
         } else {
-          this.$router.push({name: 'adminViewRoute'})
+          this.$router.push({path: '/admin'})
         }
       }).catch(error => {
         this.error.message = error.response.data.message

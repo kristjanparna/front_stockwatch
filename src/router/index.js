@@ -5,6 +5,7 @@ import RegisterView from "@/views/RegisterView";
 import WatchListView from "@/views/WatchListView";
 import PortfolioView from "@/views/PortfolioView";
 import HistoryView from "@/views/HistoryView";
+import AdminView from "@/views/AdminView";
 
 Vue.use(VueRouter)
 
@@ -33,6 +34,11 @@ const routes = [
     path: '/history',
     name: 'historyRoute',
     component: HistoryView
+  },
+  {
+    path: '/admin',
+    name: 'aminRoute',
+    component: AdminView
   }
 ]
 

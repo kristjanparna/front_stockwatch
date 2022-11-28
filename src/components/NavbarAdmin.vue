@@ -15,25 +15,19 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <router-link to="/watchlist">
-                  <a class="nav-link active" aria-current="page" href="#">Watchlist</a>
+                <router-link to="/admin">
+                  <a class="nav-link active" aria-current="page" href="#">Kasutajad</a>
                 </router-link>
               </li>
               <li class="nav-item">
-                <router-link to="/portfolio">
-                  <a class="nav-link active" aria-current="page" href="#">Portfolio</a>
+                <router-link to="/admin">
+                  <a class="nav-link active" aria-current="page" href="#">Statistika</a>
                 </router-link>
               </li>
               <li class="nav-item">
-                <router-link to="/portfolio">
-                  <a class="nav-link active" aria-current="page" href="#">Buy & Sell</a>
+                <router-link to="/admin">
+                  <a class="nav-link active" aria-current="page" href="#">Müü andmeid</a>
                 </router-link>
-              </li>
-              <li class="nav-item">
-                <router-link to="/history">
-                  <a class="nav-link active" aria-current="page" href="#">History</a>
-                </router-link>
-              </li>
               <li class="nav-item">
                 <router-link to="/">
                   <a v-on:click="clearSessionStorage" class="nav-link active" aria-current="page" href="#">Log out</a>
@@ -41,7 +35,7 @@
               </li>
             </ul>
             <form class="d-flex">
-              <input class="form-control me-2" type="search" placeholder="Otsi" aria-label="Search">
+              <input class="form-control me-2" type="search" placeholder="Otsi kasutajat" aria-label="Search">
               <button class="btn btn-outline-light" type="submit">Search</button>
             </form>
           </div>
@@ -66,11 +60,10 @@ export default {
   },
   methods: {
     getUserName: function () {
-     this.username = sessionStorage.getItem('username')
+      this.username = sessionStorage.getItem('username')
     },
     clearSessionStorage: function () {
       sessionStorage.clear();
-
     },
   },
   mounted() {
