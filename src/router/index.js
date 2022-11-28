@@ -4,6 +4,7 @@ import HomeView from '../views/HomeView.vue'
 import RegisterView from "@/views/RegisterView";
 import WatchListView from "@/views/WatchListView";
 import PortfolioView from "@/views/PortfolioView";
+import HistoryView from "@/views/HistoryView";
 
 Vue.use(VueRouter)
 
@@ -27,6 +28,11 @@ const routes = [
     path: '/portfolio',
     name: 'portfolioRoute',
     component: PortfolioView
+  },
+  {
+    path: '/history',
+    name: 'historyRoute',
+    component: HistoryView
   }
 ]
 
