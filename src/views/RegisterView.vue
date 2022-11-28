@@ -11,7 +11,8 @@
         <span class="input-group-text justify-content-center" id="basic-addon1">Eesnimi</span>
       </div>
       <div class="col-lg-4">
-        <input v-model="registerRequest.firstname" type="text" class="form-control justify-content-center" placeholder="Raibert">
+        <input v-model="registerRequest.firstname" type="text" class="form-control justify-content-center"
+               placeholder="Robert">
       </div>
     </div>
 
@@ -20,7 +21,8 @@
         <span class="input-group-text justify-content-center" id="basic-addon1">Perekonnanimi</span>
       </div>
       <div class="col-lg-4">
-        <input v-model="registerRequest.lastname" type="text" class="form-control justify-content-center" placeholder="Rebane">
+        <input v-model="registerRequest.lastname" type="text" class="form-control justify-content-center"
+               placeholder="Rebane">
       </div>
     </div>
 
@@ -29,7 +31,8 @@
         <span class="input-group-text justify-content-center" id="basic-addon1">Email</span>
       </div>
       <div class="col-lg-4">
-        <input v-model="registerRequest.email" type="text" class="form-control justify-content-center" placeholder="Raibert@neti.ee">
+        <input v-model="registerRequest.email" type="text" class="form-control justify-content-center"
+               placeholder="Raibert@neti.ee">
       </div>
     </div>
 
@@ -38,7 +41,8 @@
         <span class="input-group-text justify-content-center" id="basic-addon1">Kasutajanimi</span>
       </div>
       <div class="col-lg-4 mt-1">
-        <input v-model="registerRequest.username" type="text" class="form-control justify-content-center" placeholder="AwesomeUser1">
+        <input v-model="registerRequest.username" type="text" class="form-control justify-content-center"
+               placeholder="AwesomeUser1">
       </div>
     </div>
 
