@@ -11,7 +11,7 @@
         <span class="input-group-text justify-content-center" id="basic-addon1">Eesnimi</span>
       </div>
       <div class="col-lg-4">
-        <input v-model="firstName" type="text" class="form-control justify-content-center" placeholder="Raibert">
+        <input v-model="registerRequest.firstname" type="text" class="form-control justify-content-center" placeholder="Raibert">
       </div>
     </div>
 
@@ -20,7 +20,7 @@
         <span class="input-group-text justify-content-center" id="basic-addon1">Perekonnanimi</span>
       </div>
       <div class="col-lg-4">
-        <input v-model="lastname" type="text" class="form-control justify-content-center" placeholder="Rebane">
+        <input v-model="registerRequest.lastname" type="text" class="form-control justify-content-center" placeholder="Rebane">
       </div>
     </div>
 
@@ -29,7 +29,7 @@
         <span class="input-group-text justify-content-center" id="basic-addon1">Email</span>
       </div>
       <div class="col-lg-4">
-        <input v-model="email" type="text" class="form-control justify-content-center" placeholder="Raibert@neti.ee">
+        <input v-model="registerRequest.email" type="text" class="form-control justify-content-center" placeholder="Raibert@neti.ee">
       </div>
     </div>
 
@@ -38,7 +38,7 @@
         <span class="input-group-text justify-content-center" id="basic-addon1">Kasutajanimi</span>
       </div>
       <div class="col-lg-4 mt-1">
-        <input v-model="username" type="text" class="form-control justify-content-center" placeholder="AwesomeUser1">
+        <input v-model="registerRequest.username" type="text" class="form-control justify-content-center" placeholder="AwesomeUser1">
       </div>
     </div>
 
@@ -47,7 +47,7 @@
         <span class="input-group-text justify-content-center" id="basic-addon1">Salasõna</span>
       </div>
       <div class="col-lg-4">
-        <input v-model="password" type="password" class="form-control justify-content-center"
+        <input v-model="registerRequest.password" type="password" class="form-control justify-content-center"
                placeholder="SecretPassword1">
       </div>
     </div>
@@ -57,7 +57,8 @@
         <span class="input-group-text justify-content-center" id="basic-addon1">Korda salasõna</span>
       </div>
       <div class="col-lg-4">
-        <input v-model="passwordConfirmation" v-on:keyup.enter="validateInputs"  type="password" class="form-control justify-content-center"
+        <input v-model="passwordConfirmation" v-on:keyup.enter="validateInputs(); register()" type="password"
+               class="form-control justify-content-center"
                placeholder="SecretPassword1">
       </div>
     </div>
@@ -69,7 +70,7 @@
     </div>
 
     <div class="mt-4">
-      <button v-on:click="validateInputs" type="button" class="btn btn-dark col-lg-2">Registreeri</button>
+      <button v-on:click="validateInputs(); register()" type="button" class="btn btn-dark col-lg-2">Registreeri</button>
     </div>
 
   </div>
@@ -89,11 +90,13 @@ export default {
   },
   data: function () {
     return {
-      firstName: '',
-      lastname: '',
-      email: '',
-      username: '',
-      password: '',
+      registerRequest: {
+        username: '',
+        password: '',
+        email: '',
+        firstname: '',
+        lastname: '',
+      },
       passwordConfirmation: '',
       errorMessage: ''
     }
@@ -102,16 +105,26 @@ export default {
     validateInputs() {
       this.errorMessage = ''
 
-      if (this.firstName.length === 0 || this.lastname.length === 0 ||
-          this.email.length === 0 || this.username.length === 0 ||
-          this.password.length === 0 || this.passwordConfirmation.length === 0) {
+      if (this.registerRequest.firstname.length === 0 || this.registerRequest.lastname.length === 0 ||
+          this.registerRequest.email.length === 0 || this.registerRequest.username.length === 0 ||
+          this.registerRequest.password.length === 0 || this.passwordConfirmation.length === 0) {
         this.errorMessage = 'Palun täida kõik väljad'
-      } else if (!this.email.includes('@') || !this.email.includes('.')) {
+      } else if (!this.registerRequest.email.includes('@') || !this.registerRequest.email.includes('.')) {
         this.errorMessage = 'Palun kontrolli meiliaadressi'
-      } else if (this.password !== this.passwordConfirmation) {
+      } else if (this.registerRequest.password !== this.passwordConfirmation) {
         this.errorMessage = 'Salasõnad ei kattu'
       }
     },
+    register: function () {
+      this.$http.post("/register", this.registerRequest
+      ).then(response => {
+        this.registerRequest = response.data
+        alert("Kasuataja loomine õnnestus!")
+        this.$router.push({name: 'home'})
+      }).catch(error => {
+        this.errorMessage = error.response.data.message
+      })
+    }
   }
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
-
   <div class="container">
+
     <div class="row mt-xl-5">
       <div class="col">
         <Logo/>
@@ -53,6 +53,7 @@ import LoginButton from "@/components/buttons/LoginButton";
 import RegisterButton from "@/components/buttons/RegisterButton";
 import ErrorAlert from "@/components/ErrorAlert";
 
+
 export default {
   name: "HomeView",
   components: {ErrorAlert, RegisterButton, LoginButton, PasswordInput, UsernameInput, Logo},
@@ -60,7 +61,7 @@ export default {
     return {
       username: '',
       password: '',
-      error:{
+      error: {
         message: '',
         errorCode: '',
       },
@@ -68,43 +69,43 @@ export default {
       //TODO: Back-endis tuleb sõnumi struktuuri muuta - hetkel me saame tagasi
       //TODO: userId, username ja password aga peaks olema ainult userId ja roll
       loginInfo: {
-        id: '',
-        username: '',
-        password: '',
+        userId: '',
+        roleId: ''
       }
     }
   },
   methods: {
+    fieldsNotFilledError() {
+      this.error.message = 'Palun täida kõik väljad';
+    },
+    sendLoginRequest: function () {
+      this.$http.get("/login", {
+            params: {
+              username: this.username,
+              password: this.password
+            }
+          }
+      ).then(response => {
+        this.loginInfo = response.data;
+        sessionStorage.setItem('userId', this.loginInfo.userId);
+        sessionStorage.setItem('roleId', this.loginInfo.roleId);
+        if (this.loginInfo.roleId !== 1) {
+          this.$router.push({name: 'watchListRoute'});
+        } else {
+          this.$router.push({name: 'adminViewRoute'})
+        }
+      }).catch(error => {
+        this.error.message = error.response.data.message
+      })
+    },
     login: function () {
       this.error.message = ''
-
       if (this.username.length === 0 || this.password.length === 0) {
-        this.error.message = 'Palun täida kõik väljad';
+        this.fieldsNotFilledError.call(this);
       } else {
-        this.$http.get("/login", {
-              params: {
-                username: this.username,
-                password: this.password
-              }
-            }
-        ).then(response => {
-          this.loginInfo = response.data;
-          sessionStorage.setItem('userId', this.loginInfo.id);
-
-          // TODO: Siin tuleb loginInfo.id vahetada role'i vastu
-          if (this.loginInfo.id !== 1) {
-            this.$router.push({name: 'watchListRoute'});
-          } else {
-
-            // TODO: Sellist route'i pole veel olemas
-            this.$router.push({name: 'adminViewRoute'})
-          }
-
-        }).catch(error => {
-          this.error.message = error.response.data.message
-        })
+        this.sendLoginRequest();
       }
-    },
+    }
   }
 }
 </script>
