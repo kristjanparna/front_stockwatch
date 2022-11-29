@@ -1,0 +1,18 @@
+.iconStyleDelete {
+ cursor: pointer;
+ color: #9B2915;
+ height: 20px;
+}
+
+.iconStyleEdit {
+ cursor: pointer;
+ color: #50A2A7;
+ height: 20px;
+}
+
+.documentBackground {
+ background-image: linear-gradient(aliceblue, yellow);
+}
+ .adminNav {
+  position: relative;
+ }

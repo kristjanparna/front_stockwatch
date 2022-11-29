@@ -1,6 +1,9 @@
 <template>
+  <div>
+    <div class="row">
   <div class="container">
-    <div class="row col-2 mt-5">
+
+    <div class="row col-2 " >
       <p style="font-size: 24px "> Tere {{ username }}!</p>
     </div>
 
@@ -45,8 +48,10 @@
           <img class="img-fluid col-6" alt="Logo" src="../../assets/logo-no-background.png">
       </div>
     </div>
-
+    </div>
   </div>
+  </div>
+
 </template>
 <script>
 export default {

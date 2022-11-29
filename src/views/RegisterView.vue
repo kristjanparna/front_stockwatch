@@ -1,7 +1,10 @@
 <template>
+
+  <div>
+    <div class="row">
   <div class="container">
-    <div class="row mt-xl-5">
-      <div class="col">
+    <div class="row mt-xl-5 justify-content-center">
+      <div class="col col-8">
         <Logo/>
       </div>
     </div>
@@ -75,6 +78,8 @@
 
     <div class="mt-4">
       <button v-on:click="validateInputs(); register()" type="button" class="btn btn-dark col-lg-2">Registreeri</button>
+    </div>
+    </div>
     </div>
 
   </div>

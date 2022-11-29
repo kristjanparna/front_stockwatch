@@ -16,26 +16,33 @@
             <th scope="col">email</th>
             <th scope="col">Registreerumise kuupäev</th>
             <th scope="col"></th>
+            <th scope="col"></th>
           </tr>
           </thead>
           <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+          <tr v-for="user, index in userInfo">
+            <th scope="row">{{ index + 1 }}</th>
+            <td> {{ user.username }}</td>
+            <td> {{ user.firstname }}</td>
+            <td> {{ user.lastname }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.startDate }}</td>
             <td>
-              <font-awesome-icon icon="fa-solid fa-user-minus"/>
+              <font-awesome-icon v-on:click="updateUser(user.username)" icon="fa-solid fa-user-pen"
+                                 class="iconStyleEdit"/>
+            </td>
+            <td>
+              <font-awesome-icon v-on:click="deleteUser(user.username)" icon="fa-solid fa-user-minus"
+                                 class="iconStyleDelete"/>
             </td>
           </tr>
           </tbody>
         </table>
       </div>
-      <h1>Siia võimalus kasutaja registreerumise lõpetamiseks, kasutaja andmete muutmiseks (email ntks).
-      </h1>
+      <p>Siia võimalus kasutaja registreerumise lõpetamiseks, kasutaja andmete muutmiseks (email ntks).
+      </p>
     </div>
+    <button v-on:click="deleteUser" type="button" class="btn btn-outline-success">KUSTUTA!!!</button>
   </div>
 
 </template>
@@ -49,10 +56,13 @@ export default {
   components: {NavbarAdmin},
   data: function () {
     return {
+      selectedUserName: '',
       userId: '',
+      index: '',
+      endDate: new Date().toISOString().slice(0, 10),
       userInfo: {
         username: '',
-        firstname:'',
+        firstname: '',
         lastname: '',
         email: '',
         startDate: ''
@@ -67,18 +77,34 @@ export default {
       this.$http.get("/userinfo")
           .then(response => {
             this.userInfo = response.data
+            console.log(response.data)
           })
           .catch(error => {
             console.log(error)
           })
     },
+    deleteUser: function (username) {
+      this.$http.post("/remove", null, {
+            params: {
+              endDate: this.endDate,
+              username: username
+            }
+          }
+      ).then(response => {
+        console.log(response.data)
+      }).catch(error => {
+        console.log(error)
+      })
+    },
   },
   mounted() {
     this.getUserName()
+
   },
   beforeMount() {
     this.getUserInfo()
-  }
+  },
+
 }
 </script>
 
