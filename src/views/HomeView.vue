@@ -69,8 +69,6 @@ export default {
         errorCode: '',
       },
 
-      //TODO: Back-endis tuleb sõnumi struktuuri muuta - hetkel me saame tagasi
-      //TODO: userId, username ja password aga peaks olema ainult userId ja roll
       loginInfo: {
         userId: '',
         roleId: '',
