@@ -4,6 +4,38 @@
     <div>
       <NavbarAdmin/>
     </div>
+    <div class="row">
+      <div class="col-9">
+        <table class="table table-hover" style="margin-top: 100px">
+          <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Kasutaja</th>
+            <th scope="col">Eesnimi</th>
+            <th scope="col">Perekonnanimi</th>
+            <th scope="col">email</th>
+            <th scope="col">Registreerumise kuupäev</th>
+            <th scope="col"></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+              <font-awesome-icon icon="fa-solid fa-user-minus"/>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <h1>Siia võimalus kasutaja registreerumise lõpetamiseks, kasutaja andmete muutmiseks (email ntks).
+      </h1>
+    </div>
   </div>
 
 </template>
@@ -17,12 +49,14 @@ export default {
   components: {NavbarAdmin},
   data: function () {
     return {
-      username: ''
+      username: '',
+      userId: ''
     }
   },
   methods: {
     getUserName: function () {
       this.username = sessionStorage.getItem('username')
+      this.userId = sessionStorage.getItem('userId')
     }
   },
   mounted() {
