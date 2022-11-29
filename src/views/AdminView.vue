@@ -49,18 +49,35 @@ export default {
   components: {NavbarAdmin},
   data: function () {
     return {
-      username: '',
-      userId: ''
+      userId: '',
+      userInfo: {
+        username: '',
+        firstname:'',
+        lastname: '',
+        email: '',
+        startDate: ''
+      }
     }
   },
   methods: {
     getUserName: function () {
-      this.username = sessionStorage.getItem('username')
       this.userId = sessionStorage.getItem('userId')
-    }
+    },
+    getUserInfo: function () {
+      this.$http.get("/userinfo")
+          .then(response => {
+            this.userInfo = response.data
+          })
+          .catch(error => {
+            console.log(error)
+          })
+    },
   },
   mounted() {
     this.getUserName()
+  },
+  beforeMount() {
+    this.getUserInfo()
   }
 }
 </script>
