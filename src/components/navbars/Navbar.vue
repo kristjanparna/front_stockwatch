@@ -1,9 +1,8 @@
 <template>
   <div class="container">
-    <div class="row col-2 mt-5">
+    <div class="row col-2 mt-3">
       <p style="font-size: 24px "> Tere {{ username }}!</p>
     </div>
-
     <div class="row ">
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-opacity-75 mt-5 col-8" style="border-radius: 10px">
         <div class="container-fluid">
@@ -21,35 +20,36 @@
               </li>
               <li class="nav-item">
                 <router-link to="/portfolio">
-                  <a class="nav-link active" aria-current="page" href="#">Portfolio</a>
+                  <a class="nav-link active" aria-current="page" href="#">Portfell</a>
                 </router-link>
               </li>
               <li class="nav-item">
                 <router-link to="/portfolio">
-                  <a class="nav-link active" aria-current="page" href="#">Buy & Sell</a>
+                  <a class="nav-link active" aria-current="page" href="#">Ost & Müük</a>
                 </router-link>
               </li>
               <li class="nav-item">
                 <router-link to="/history">
-                  <a class="nav-link active" aria-current="page" href="#">History</a>
+                  <a class="nav-link active" aria-current="page" href="#">Ajalugu</a>
                 </router-link>
               </li>
               <li class="nav-item">
                 <router-link to="/">
-                  <a v-on:click="clearSessionStorage" class="nav-link active" aria-current="page" href="#">Log out</a>
+                  <a v-on:click="clearSessionStorage" class="nav-link active" aria-current="page" href="#">Logi
+                    välja</a>
                 </router-link>
               </li>
             </ul>
             <form class="d-flex">
               <input class="form-control me-2" type="search" placeholder="Otsi" aria-label="Search">
-              <button class="btn btn-outline-light" type="submit">Search</button>
+              <button class="btn btn-outline-light" type="submit">OTSI</button>
             </form>
           </div>
         </div>
       </nav>
       <div class="col-lg-4 mt-4">
         <router-link to="/watchlist">
-          <img class="img-fluid col-6" alt="Logo" src="../assets/logo-no-background.png">
+          <img class="img-fluid col-6" alt="Logo" src="../../assets/logo-no-background.png">
         </router-link>
       </div>
     </div>
@@ -66,7 +66,7 @@ export default {
   },
   methods: {
     getUserName: function () {
-     this.username = sessionStorage.getItem('username')
+      this.username = sessionStorage.getItem('username')
     },
     clearSessionStorage: function () {
       sessionStorage.clear();

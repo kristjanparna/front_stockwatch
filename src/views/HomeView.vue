@@ -12,7 +12,7 @@
         <span class="input-group-text justify-content-center" id="basic-addon1">Kasutajanimi</span>
       </div>
       <div class="col-lg-4 mt-1">
-        <input v-model="username" type="text" class="form-control justify-content-center" placeholder="AwesomeUser1">
+        <input v-model="username" type="text" class="form-control justify-content-center" placeholder="Kasutaja">
       </div>
     </div>
 
@@ -22,7 +22,7 @@
       </div>
       <div class="col-lg-4">
         <input v-model="password" v-on:keyup.enter="login" type="password" class="form-control justify-content-center"
-               placeholder="SecretPassword1">
+               placeholder="Salasõna">
       </div>
     </div>
 

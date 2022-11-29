@@ -1,16 +1,31 @@
 <template>
-<div>
+  <div>
 
-  <Navbar/>
-  <p>HISTORY</p>
+    <Navbar/>
+    <p>HISTORY</p>
 
-</div>
+  </div>
 </template>
 
 <script>
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/navbars/Navbar";
+
 export default {
   name: "HistoryView",
-  components: {Navbar}
+  components: {Navbar},
+  data: function () {
+    return {
+      userId: '',
+
+    }
+  },
+  methods: {
+    getUserId: function () {
+      this.userId = sessionStorage.getItem('userId')
+    },
+  },
+  mounted() {
+    this.getUserId()
+  }
 }
 </script>

@@ -1,16 +1,15 @@
 <template>
 
-
   <div class="container">
-
-    <NavbarAdmin/>
-
+    <div>
+      <NavbarAdmin/>
+    </div>
   </div>
 
 </template>
 
 <script>
-import NavbarAdmin from "@/components/NavbarAdmin";
+import NavbarAdmin from "@/components/navbars/NavbarAdmin";
 
 
 export default {

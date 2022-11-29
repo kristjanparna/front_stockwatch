@@ -43,7 +43,7 @@
       </nav>
       <div class="col-lg-4 mt-4">
         <router-link to="/watchlist">
-          <img class="img-fluid col-6" alt="Logo" src="../assets/logo-no-background.png">
+          <img class="img-fluid col-6" alt="Logo" src="../../assets/logo-no-background.png">
         </router-link>
       </div>
     </div>
