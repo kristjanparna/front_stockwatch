@@ -1,5 +1,5 @@
 <template >
-  <div id="app" class="documentBackground">
+  <div  class="documentBackground">
     <div>
       <router-view/>
     </div>
@@ -20,7 +20,7 @@
   margin: 0;
   width: 100%;
   min-height: 100vh;
-  background-image: linear-gradient(aliceblue, yellow);
+  background-image: linear-gradient(#e2fdff, #9bb1ff, #bfd7ff);
 
 }
 
