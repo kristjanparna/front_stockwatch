@@ -4,12 +4,7 @@
 
     <Navbar/>
 
-
-    <h1>{{ userId }}</h1>
-    <p>WATCHLIST</p>
-
   </div>
-
 </template>
 
 <script>

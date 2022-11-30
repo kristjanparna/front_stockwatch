@@ -1,5 +1,4 @@
 <template>
-
   <div class="container">
     <div>
       <NavbarAdmin/>
@@ -84,7 +83,7 @@ export default {
           })
     },
     deleteUser: function (username) {
-      this.$http.post("/remove", null, {
+      this.$http.put("/remove", null, {
             params: {
               endDate: this.endDate,
               username: username
@@ -96,6 +95,7 @@ export default {
         console.log(error)
       })
     },
+
   },
   mounted() {
     this.getUserName()

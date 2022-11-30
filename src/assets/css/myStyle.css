@@ -16,7 +16,7 @@
 
 /*id="app"*/
  .documentBackground {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Calibri, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -26,4 +26,11 @@
   width: 100%;
   min-height: 100vh;
   background-image: linear-gradient(#e2fdff, #9bb1ff, #bfd7ff);
+ }
+
+ .searchTable {
+  font-family: Calibri, sans-serif;
+  font-size: 20px;
+  margin-top: 10px;
+  cursor: pointer;
  }
