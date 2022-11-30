@@ -19,19 +19,19 @@
           </tr>
           </thead>
           <tbody>
-          <tr v-for="user, index in userInfo">
-            <th scope="row">{{ index + 1 }}</th>
+          <tr v-for="user in userInfo">
+            <th scope="row">{{ user.index }}</th>
             <td> {{ user.username }}</td>
             <td> {{ user.firstname }}</td>
             <td> {{ user.lastname }}</td>
             <td>{{ user.email }}</td>
             <td>{{ user.startDate }}</td>
             <td>
-              <font-awesome-icon v-on:click="updateUser(user.username)" icon="fa-solid fa-user-pen"
+              <font-awesome-icon icon="fa-solid fa-user-pen"
                                  class="iconStyleEdit"/>
             </td>
             <td>
-              <font-awesome-icon v-on:click="deleteUser(user.username)" icon="fa-solid fa-user-minus"
+              <font-awesome-icon v-on:click="deleteUser(info.username)" icon="fa-solid fa-user-minus"
                                  class="iconStyleDelete"/>
             </td>
           </tr>
@@ -58,7 +58,6 @@ export default {
       selectedUserName: '',
       userId: '',
       index: '',
-      endDate: new Date().toISOString().slice(0, 10),
       userInfo: {
         username: '',
         firstname: '',
@@ -72,10 +71,18 @@ export default {
     getUserName: function () {
       this.userId = sessionStorage.getItem('userId')
     },
+    addSequenceNumbers: function () {
+      let counter = 1
+      this.userInfo.forEach(user => {
+        user.index = counter
+        counter++
+      });
+    },
     getUserInfo: function () {
       this.$http.get("/userinfo")
           .then(response => {
             this.userInfo = response.data
+            this.addSequenceNumbers()
             console.log(response.data)
           })
           .catch(error => {
@@ -85,7 +92,6 @@ export default {
     deleteUser: function (username) {
       this.$http.put("/remove", null, {
             params: {
-              endDate: this.endDate,
               username: username
             }
           }
@@ -103,8 +109,7 @@ export default {
   },
   beforeMount() {
     this.getUserInfo()
-  },
-
+  }
 }
 </script>
 
