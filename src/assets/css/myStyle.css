@@ -24,8 +24,8 @@
     margin: 0;
     width: 100%;
     min-height: 100vh;
-    /*background-image: url("/src/assets/logo.png");*/
-    background-color: #cccccc;
+    background-image: linear-gradient(45deg, #C8E0F4, #9DD1F1);
+
 }
 
 .searchTable {
@@ -60,4 +60,9 @@
 .parent {
     margin-top: 5px;
     text-align: center;
+}
+
+.navbarGreeting {
+    font-size: 24px;
+    font-weight: bold;
 }

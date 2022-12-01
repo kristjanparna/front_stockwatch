@@ -121,7 +121,7 @@ export default {
       this.userId = sessionStorage.getItem('userId')
     },
     addToWatchlist: function () {
-      this.$http.post("/watchlist/save", this.watchlistRequest
+      this.$http.post("/watchlist", this.watchlistRequest
       ).then(response => {
         console.log(response.data)
         this.$router.push({name: 'watchListRoute'})
