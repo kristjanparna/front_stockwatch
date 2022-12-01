@@ -7,6 +7,7 @@ import PortfolioView from "@/views/PortfolioView";
 import HistoryView from "@/views/HistoryView";
 import AdminView from "@/views/AdminView";
 import SearchView from "@/views/SearchView";
+import WatchlistAddView from "@/views/WatchlistAddView";
 
 Vue.use(VueRouter)
 
@@ -45,6 +46,11 @@ const routes = [
     path: '/search',
     name:  'searchRoute',
     component: SearchView
+  },
+  {
+    path: '/watchlist/add',
+    name : 'watchlistAddRoute',
+    component: WatchlistAddView
   }
 ]
 

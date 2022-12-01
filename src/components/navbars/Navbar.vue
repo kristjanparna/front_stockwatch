@@ -44,7 +44,7 @@
               </li>
             </ul>
             <form class="d-flex">
-              <input v-model="search" v-on:keyup.enter="searchTicker" v-on:input="searchTicker" class="form-control me-2" type="search" placeholder="Otsi" aria-label="Search">
+              <input v-model="search" v-on:keyup.enter="searchTicker" class="form-control me-2" type="search" placeholder="Otsi" aria-label="Search">
               <button v-on:click="searchTicker" class="btn btn-outline-light" type="submit">OTSI</button>
             </form>
           </div>
@@ -71,7 +71,8 @@ export default {
       quotes: [
         {
           shortname: '',
-          symbol: ''
+          symbol: '',
+          exchDisp: '',
         }
       ],
     }

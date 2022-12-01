@@ -2,17 +2,18 @@
   <div class="container">
     <div>
 
-      <Navbar @searchTicker="searchTicker" />
+      <Navbar @searchTicker="searchTicker"/>
     </div>
     <div>
 
       <div class="row">
         <div class="col-9">
-          <table class="table table-hover searchTable" >
+          <table class="table table-hover searchTable">
             <thead>
             <tr>
               <th scope="col">Ticker</th>
               <th scope="col">Ettevõtte nimi</th>
+              <th scope="col">Turg</th>
               <th scope="col"></th>
             </tr>
             </thead>
@@ -20,6 +21,7 @@
             <tr v-for="quote in quotes" v-on:click="searchInstrument(quote.symbol)">
               <td> {{ quote.symbol }}</td>
               <td> {{ quote.shortname }}</td>
+              <td> {{ quote.exchDisp }}</td>
               <td> {{ }}</td>
 
             </tr>
@@ -34,7 +36,6 @@
 
 <script>
 import Navbar from "@/components/navbars/Navbar";
-import router from "@/router";
 
 export default {
   name: "SearchView",
@@ -45,7 +46,8 @@ export default {
       quotes: [
         {
           shortname: '',
-          symbol: ''
+          symbol: '',
+          exchDisp: ''
         }
       ]
     }
@@ -68,17 +70,8 @@ export default {
       })
     },
     searchInstrument: function (symbol) {
-      this.$http.get("/search", {
-            params: {
-              symbol: symbol
-            }
-          }
-      ).then(response => {
-        console.log(response.data)
-        this.$router.push('/addToWatchlist')
-      }).catch(error => {
-        console.log(error)
-      })
+      sessionStorage.setItem('symbol', symbol)
+      this.$router.push('/watchlist/add')
     },
   },
   mounted() {
@@ -86,7 +79,6 @@ export default {
   },
   beforeMount() {
     this.searchTicker()
-
   }
 }
 </script>
