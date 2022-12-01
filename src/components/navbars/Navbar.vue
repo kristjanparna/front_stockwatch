@@ -44,8 +44,8 @@
               </li>
             </ul>
             <form class="d-flex">
-              <input class="form-control me-2" type="search" placeholder="Otsi" aria-label="Search">
-              <button class="btn btn-outline-light" type="submit">OTSI</button>
+              <input v-model="search" v-on:keyup.enter="searchTicker" class="form-control me-2" type="search" placeholder="Otsi" aria-label="Search">
+              <button v-on:click="searchTicker" class="btn btn-outline-light" type="submit">OTSI</button>
             </form>
           </div>
         </div>
@@ -66,7 +66,15 @@ export default {
   name: 'Navbar',
   data: function () {
     return {
-      username: ''
+      username: '',
+      search: '',
+      quotes: [
+        {
+          shortname: '',
+          symbol: '',
+          exchDisp: '',
+        }
+      ],
     }
   },
   methods: {
@@ -75,8 +83,12 @@ export default {
     },
     clearSessionStorage: function () {
       sessionStorage.clear();
-
     },
+    searchTicker: function () {
+      sessionStorage.setItem('search', this.search)
+      this.$emit('searchTicker')
+      this.$router.push({path: '/search'})
+    }
   },
   mounted() {
     this.getUserName()
