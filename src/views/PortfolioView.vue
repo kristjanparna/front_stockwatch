@@ -2,7 +2,8 @@
   <div>
 
     <Navbar/>
-    <p>PORTFOLIO</p>
+
+
   </div>
 </template>
 
