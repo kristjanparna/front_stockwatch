@@ -7,7 +7,7 @@
       <p style="font-size: 24px "> Tere {{ username }}!</p>
     </div>
     <div class="row">
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-opacity-75 mt-5 col-8" style="border-radius: 10px">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-opacity-75 mt-4 col-8" style="border-radius: 10px">
         <div class="container-fluid">
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                   data-bs-target="#navbarSupportedContent"

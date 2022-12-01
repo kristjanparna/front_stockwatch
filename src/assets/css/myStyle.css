@@ -1,49 +1,63 @@
 .iconStyleDelete {
- cursor: pointer;
- color: #9B2915;
- height: 20px;
+    cursor: pointer;
+    color: #9B2915;
+    height: 20px;
 }
 
 .iconStyleEdit {
- cursor: pointer;
- color: #50A2A7;
- height: 20px;
+    cursor: pointer;
+    color: #50A2A7;
+    height: 20px;
 }
 
- .adminNav {
-  position: relative;
- }
+.adminNav {
+    position: relative;
+}
 
-/*id="app"*/
- .documentBackground {
-  font-family: Calibri, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  padding: 0;
-  margin: 0;
-  width: 100%;
-  min-height: 100vh;
-  background-image: linear-gradient(#e2fdff, #9bb1ff, #bfd7ff);
- }
+.documentBackground {
+    font-family: Calibri, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    min-height: 100vh;
+    /*background-image: url("/src/assets/logo.png");*/
+    background-color: #cccccc;
+}
 
- .searchTable {
-  font-family: Calibri, sans-serif;
-  font-size: 20px;
-  margin-top: 10px;
-  cursor: pointer;
- }
+.searchTable {
+    font-family: Calibri, sans-serif;
+    font-size: 20px;
+    margin-top: 10px;
+    cursor: pointer;
+}
 
- .submitButton {
-  margin-top: 10px;
-  position: relative;
-  right: 70px;
-  opacity: 75%;
- }
+.submitButton {
+    margin-top: 10px;
+    position: relative;
+    right: 70px;
+    opacity: 75%;
+}
 
- .inputBoxes {
-  margin-top: 5px;
-  position: relative;
-  left: 528px;
- }
+.inputBoxes {
+    display: inline-block;
+    position: relative;
+    right: 120px;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+.priceLabel {
+    display: inline-block;
+    position: relative;
+    right: 125px;
+    margin-top: 10px;
+}
+
+.parent {
+    margin-top: 5px;
+    text-align: center;
+}
