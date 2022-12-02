@@ -83,7 +83,6 @@ export default {
           .then(response => {
             this.userInfo = response.data
             this.addSequenceNumbers()
-            console.log(response.data)
           })
           .catch(error => {
             console.log(error)
@@ -101,11 +100,9 @@ export default {
         console.log(error)
       })
     },
-
   },
   mounted() {
     this.getUserName()
-
   },
   beforeMount() {
     this.getUserInfo()

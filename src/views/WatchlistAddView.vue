@@ -11,7 +11,7 @@
           </thead>
           <tbody>
           <tr>
-            <th scope="row">Symbol</th>
+            <th scope="row">Sümbol</th>
             <td>{{ results.ticker }}</td>
           </tr>
           <tr>
