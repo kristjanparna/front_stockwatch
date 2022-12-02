@@ -7,28 +7,29 @@
           <thead>
           <tr>
             <th scope="col"></th>
+            <th scope="col"></th>
           </tr>
           </thead>
           <tbody>
           <tr>
-            <th scope="row">Sümbol</th>
-            <td>{{ results.ticker }}</td>
+            <th scope="row">Symbol</th>
+            <td>{{ searchResult.ticker }}</td>
           </tr>
           <tr>
             <th scope="row">Nimi</th>
-            <td>{{ results.shortName }}</td>
+            <td>{{ searchResult.shortName }}</td>
           </tr>
           <tr>
             <th scope="row">Hind</th>
-            <td>{{ results.currentPrice }} {{ results.currency }}</td>
+            <td>{{ searchResult.currentPrice }} {{ searchResult.currency }}</td>
           </tr>
           <tr>
             <th scope="row">Muutus</th>
-            <td>{{ results.priceChangePercentage }}%</td>
+            <td>{{ searchResult.priceChangePercentage }}%</td>
           </tr>
           <tr>
             <th scope="row">Turg</th>
-            <td>{{ results.exchange }}</td>
+            <td>{{ searchResult.exchange }}</td>
           </tr>
           </tbody>
         </table>
@@ -38,21 +39,30 @@
     <div class="row">
       <div class="col-6">
         <div class="input-group">
-          <textarea v-model="userComment" class="form-control" aria-label="With textarea"
+          <textarea v-model="watchlistRequest.userComment" class="form-control" aria-label="With textarea"
                     placeholder="Sisesta kommentaar"></textarea>
         </div>
       </div>
     </div>
-    <div class="inputBoxes">
-      <div class="col-1 ">
-      <div class="input-group-sm">
-        <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+    <div>
+      <div>
+        <div class="d-inline-flex">
+          <p1 class="priceLabel">Hind</p1>
+          <input v-model="watchlistRequest.priceLower" type="text" class="form-control inputBoxes">
+        </div>
       </div>
     </div>
+    <div>
+      <div>
+        <div class="d-inline-flex">
+          <p1 class="priceLabel">Hind</p1>
+          <input v-model="watchlistRequest.priceHigher" type="text" class="form-control inputBoxes">
+        </div>
+      </div>
     </div>
     <div class="row">
       <div>
-        <div class="submitButton">
+        <div class="submitButton mb-5">
           <button v-on:click="addToWatchlist" class="btn btn-dark" type="button">Lisa watchlisti</button>
         </div>
       </div>
@@ -71,8 +81,16 @@ export default {
 
   data: function () {
     return {
+      watchlistRequest: {
+        ticker: '',
+        userId: Number( sessionStorage.getItem('userId')),
+        priceHigher: '',
+        priceLower: '',
+        userComment: '',
+        priceAtAddition: '',
+      },
       symbol: '',
-      results: {
+      searchResult: {
         ticker: '',
         exchange: '',
         shortName: '',
@@ -92,7 +110,10 @@ export default {
           }
       ).then(response => {
         console.log(response.data)
-        this.results = response.data
+        this.searchResult = response.data
+        this.watchlistRequest.ticker = this.searchResult.ticker
+        this.watchlistRequest.priceAtAddition = this.searchResult.currentPrice
+
       }).catch(error => {
         console.log(error)
       })
@@ -101,9 +122,10 @@ export default {
       this.userId = sessionStorage.getItem('userId')
     },
     addToWatchlist: function () {
-      this.$http.post("/watchlist/save", this.results, null
+      this.$http.post("/watchlist", this.watchlistRequest
       ).then(response => {
         console.log(response.data)
+        this.$router.push({name: 'watchListRoute'})
       }).catch(error => {
         console.log(error)
       })

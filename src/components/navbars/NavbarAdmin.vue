@@ -3,7 +3,7 @@
     <div class="row">
   <div class="container">
     <div class="row col-2 " >
-      <p style="font-size: 24px "> Tere {{ username }}!</p>
+      <p class="navbarGreeting"> Tere {{ username }}!</p>
     </div>
     <div class="row ">
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-opacity-75 mt-5 col-8" style="border-radius: 10px">
@@ -49,7 +49,6 @@
     </div>
   </div>
   </div>
-
 </template>
 <script>
 export default {

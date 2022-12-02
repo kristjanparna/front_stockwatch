@@ -1,52 +1,42 @@
 <template>
-
   <div>
-    <div class="row">
-      <div class="container ">
-
-        <div class="row mt-xl-5 justify-content-center ">
-          <div class="col-6 ">
+  <div class="row d-inline">
+    <div class="container">
+      <div>
+        <div class="row mt-5 justify-content-center">
+          <div class="col-6">
             <Logo/>
           </div>
         </div>
-
-        <div class="offset-3 input-group">
-          <div class="col-1 mt-1">
-<!--            <span class="input-group-text justify-content-center" id="basic-addon1">Kasutajanimi</span>-->
-          </div>
-          <div class="col-4 mt-1">
+        <div class="input-group justify-content-center">
+          <div class="col-3 mt-1">
             <input v-model="username" type="text" class="form-control justify-content-center" placeholder="Kasutaja">
           </div>
         </div>
-
-        <div class="mt-1 offset-3 input-group">
-          <div class="col-1">
-<!--            <span class="input-group-text justify-content-center" id="basic-addon1">Salasõna</span>-->
-          </div>
-          <div class="col-4">
+        <div class="input-group mt-1 justify-content-center">
+          <div class="col-3">
             <input v-model="password" v-on:keyup.enter="login" type="password"
                    class="form-control justify-content-center"
                    placeholder="Salasõna">
           </div>
         </div>
-
         <div class="mt-1 offset-3 input-group">
           <div class="col-6">
             <ErrorAlert :message="error.message"/>
           </div>
         </div>
 
-        <div class="mt-4">
-          <button v-on:click="login" type="button" class="btn btn-dark col-lg-2">Logi sisse</button>
+        <div class="mt-4 justify-content-center">
+          <button v-on:click="login" type="button" class="btn btn-dark col-1">Logi sisse</button>
         </div>
 
-        <div class="mt-4 row">
+        <div class="mt-2 justify-content-center">
           <RegisterButton/>
         </div>
       </div>
     </div>
   </div>
-
+  </div>
 </template>
 
 <script>

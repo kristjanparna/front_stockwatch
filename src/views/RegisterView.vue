@@ -3,74 +3,74 @@
   <div>
     <div class="row">
   <div class="container">
-    <div class="row mt-xl-5 justify-content-center">
-      <div class="col col-8">
+    <div class="row mt-5 justify-content-center">
+      <div class="col-6">
         <Logo/>
       </div>
     </div>
 
-    <div class="mt-5 offset-3 input-group">
-      <div class="col-lg-2">
+    <div class="mt-5 justify-content-center input-group">
+      <div class="col-2">
         <span class="input-group-text justify-content-center" id="basic-addon1">Eesnimi</span>
       </div>
-      <div class="col-lg-4">
+      <div class="col-3">
         <input v-model="registerRequest.firstname" type="text" class="form-control justify-content-center"
                placeholder="Robert">
       </div>
     </div>
 
-    <div class="mt-1 offset-3 input-group">
-      <div class="col-lg-2">
+    <div class="mt-1 justify-content-center input-group">
+      <div class="col-2">
         <span class="input-group-text justify-content-center" id="basic-addon1">Perekonnanimi</span>
       </div>
-      <div class="col-lg-4">
+      <div class="col-3">
         <input v-model="registerRequest.lastname" type="text" class="form-control justify-content-center"
                placeholder="Rebane">
       </div>
     </div>
 
-    <div class="mt-1 offset-3 input-group">
-      <div class="col-lg-2">
+    <div class="mt-1 justify-content-center input-group">
+      <div class="col-2">
         <span class="input-group-text justify-content-center" id="basic-addon1">Email</span>
       </div>
-      <div class="col-lg-4">
+      <div class="col-3">
         <input v-model="registerRequest.email" type="text" class="form-control justify-content-center"
                placeholder="Raibert@neti.ee">
       </div>
     </div>
 
-    <div class="offset-3 input-group">
-      <div class="col-lg-2 mt-1">
+    <div class="justify-content-center input-group">
+      <div class="col-2 mt-1">
         <span class="input-group-text justify-content-center" id="basic-addon1">Kasutajanimi</span>
       </div>
-      <div class="col-lg-4 mt-1">
+      <div class="col-3 mt-1">
         <input v-model="registerRequest.username" type="text" class="form-control justify-content-center"
                placeholder="AwesomeUser1">
       </div>
     </div>
 
-    <div class="mt-1 offset-3 input-group">
-      <div class="col-lg-2">
+    <div class="mt-1 justify-content-center input-group">
+      <div class="col-2">
         <span class="input-group-text justify-content-center" id="basic-addon1">Salasõna</span>
       </div>
-      <div class="col-lg-4">
+      <div class="col-3">
         <input v-model="registerRequest.password" type="password" class="form-control justify-content-center"
                placeholder="SecretPassword1">
       </div>
     </div>
 
-    <div class="mt-1 offset-3 input-group">
-      <div class="col-lg-2">
+    <div class="mt-1 input-group justify-content-center">
+      <div class="col-2">
         <span class="input-group-text justify-content-center" id="basic-addon1">Korda salasõna</span>
       </div>
-      <div class="col-lg-4">
+      <div class="col-3">
         <input v-model="passwordConfirmation" v-on:keyup.enter="validateInputs(); register()" type="password"
                class="form-control justify-content-center"
                placeholder="SecretPassword1">
       </div>
     </div>
 
-    <div class="mt-1 offset-3 input-group">
+    <div class="mt-1 input-group justify-content-center">
       <div class="col-lg-6">
         <ErrorAlert :message="errorMessage"/>
       </div>
