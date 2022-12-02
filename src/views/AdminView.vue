@@ -19,7 +19,7 @@
           </tr>
           </thead>
           <tbody>
-          <tr v-for="user in userInfo">
+          <tr v-for="user in userInfo" :key="user.name">
             <th scope="row">{{ user.index }}</th>
             <td> {{ user.username }}</td>
             <td> {{ user.firstname }}</td>
@@ -27,23 +27,27 @@
             <td>{{ user.email }}</td>
             <td>{{ user.startDate }}</td>
             <td>
-              <font-awesome-icon icon="fa-solid fa-user-pen"
+              <font-awesome-icon v-on:click="toggle = !toggle" icon="fa-solid fa-user-pen"
                                  class="iconStyleEdit"/>
+              <div v-show="toggle" class="d-inline-flex">
+                <input v-show="toggle" v-model="email" type="text" class="form-control hiding" placeholder="email"
+                       aria-label="Username"
+                       aria-describedby="basic-addon1">
+                <font-awesome-icon v-show="toggle" v-on:click="editUserEmail(user.username)" class="checkButton"
+
+                               icon="fa-solid fa-circle-check"/>
+              </div>
             </td>
             <td>
-              <font-awesome-icon v-on:click="deleteUser(info.username)" icon="fa-solid fa-user-minus"
+              <font-awesome-icon v-on:click="deleteUser(user.username)" icon="fa-solid fa-user-minus"
                                  class="iconStyleDelete"/>
             </td>
           </tr>
           </tbody>
         </table>
       </div>
-      <p>Siia võimalus kasutaja registreerumise lõpetamiseks, kasutaja andmete muutmiseks (email ntks).
-      </p>
     </div>
-    <button v-on:click="deleteUser" type="button" class="btn btn-outline-success">KUSTUTA!!!</button>
   </div>
-
 </template>
 
 <script>
@@ -55,9 +59,11 @@ export default {
   components: {NavbarAdmin},
   data: function () {
     return {
+      toggle: false,
       selectedUserName: '',
       userId: '',
       index: '',
+      email: '',
       userInfo: {
         username: '',
         firstname: '',
@@ -101,6 +107,20 @@ export default {
         console.log(error)
       })
     },
+    editUserEmail: function (username) {
+      this.$http.put("/userinfo", null, {
+            params: {
+              email: this.email,
+              username: username
+            }
+          }
+      ).then(response => {
+        console.log(response.data)
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+
 
   },
   mounted() {

@@ -16,7 +16,6 @@ export default {
   data: function () {
     return {
       userId: '',
-
     }
   },
   methods: {

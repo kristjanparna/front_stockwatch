@@ -1,5 +1,6 @@
 <template>
-  <div class="row">
+  <div>
+  <div class="row d-inline">
     <div class="container">
       <div>
         <div class="row mt-5 justify-content-center">
@@ -29,13 +30,13 @@
           <button v-on:click="login" type="button" class="btn btn-dark col-1">Logi sisse</button>
         </div>
 
-        <div class="mt-4 justify-content-center">
+        <div class="mt-2 justify-content-center">
           <RegisterButton/>
         </div>
       </div>
     </div>
   </div>
-
+  </div>
 </template>
 
 <script>

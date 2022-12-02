@@ -66,3 +66,12 @@
     font-size: 24px;
     font-weight: bold;
 }
+
+.checkButton {
+    color: darkgreen;
+    display: flex;
+    cursor: pointer;
+    height: 20px;
+    margin-left: 5px;
+    margin-top: 7px;
+}
