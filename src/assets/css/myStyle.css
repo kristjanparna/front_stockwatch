@@ -10,6 +10,12 @@
     height: 20px;
 }
 
+.iconStyleEditBlack {
+    cursor: pointer;
+    color: #000000;
+    height: 15px;
+}
+
 .adminNav {
     position: relative;
 }
@@ -24,7 +30,7 @@
     margin: 0;
     width: 100%;
     min-height: 100vh;
-    background-image: linear-gradient(45deg, #C8E0F4, #9DD1F1);
+    background-image: linear-gradient(45deg, #16C55B ,#F2F582, #16C55B);
 
 }
 
@@ -74,4 +80,26 @@
     height: 20px;
     margin-left: 5px;
     margin-top: 7px;
+}
+
+.watchlistTable {
+    border-radius: 10px;
+    border-color: #4249D9;
+
+    background-color: #83BEF5;
+    background-blend-mode: difference;
+
+}
+
+.watchlistTableHead{
+    font-family: Calibri, sans-serif;
+    font-size: 15px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 10px;
+    border-color: #4249D9;
+}
+
+.watchlistBackground {
+
 }
