@@ -5,15 +5,15 @@
     </div>
     <div class="row">
       <div class="col-9">
-        <table class="table table-hover" style="margin-top: 100px">
+        <table class="table table-hover searchTableAdd" style="margin-top: 100px">
           <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Kasutaja</th>
+            <th scope="col">Kasutajanimi</th>
             <th scope="col">Eesnimi</th>
             <th scope="col">Perekonnanimi</th>
-            <th scope="col">email</th>
-            <th scope="col">Registreerumise kuupäev</th>
+            <th scope="col">Email</th>
+            <th scope="col">Registreerimise kuupäev</th>
             <th scope="col"></th>
             <th scope="col"></th>
           </tr>
@@ -33,9 +33,9 @@
                 <input v-show="toggle" v-model="email" type="text" class="form-control hiding" placeholder="email"
                        aria-label="Username"
                        aria-describedby="basic-addon1">
-                <font-awesome-icon v-show="toggle" v-on:click="editUserEmail(user.username)" class="checkButton"
-
-                               icon="fa-solid fa-circle-check"/>
+                <font-awesome-icon v-show="toggle" v-on:click="editUserEmail(user.username)"
+                                   class="checkButton"
+                                   icon="fa-solid fa-circle-check"/>
               </div>
             </td>
             <td>

@@ -1,41 +1,34 @@
 <template>
   <div class="container">
     <Navbar/>
-    <div class="row">
       <div class="col-6">
-        <table class="table">
-          <thead>
-          <tr>
-            <th scope="col"></th>
-            <th scope="col"></th>
-          </tr>
-          </thead>
+        <table class="table searchTableAdd">
           <tbody>
           <tr>
-            <th scope="row">Symbol</th>
+            <th class="tableBorders" scope="row">Sümbol</th>
             <td>{{ searchResult.ticker }}</td>
           </tr>
           <tr>
-            <th scope="row">Nimi</th>
+            <th class="tableBorders" scope="row">Nimi</th>
             <td>{{ searchResult.shortName }}</td>
           </tr>
           <tr>
-            <th scope="row">Hind</th>
+            <th class="tableBorders" scope="row">Hind</th>
             <td>{{ searchResult.currentPrice }} {{ searchResult.currency }}</td>
           </tr>
           <tr>
-            <th scope="row">Muutus</th>
+            <th class="tableBorders" scope="row">Muutus</th>
             <td>{{ searchResult.priceChangePercentage }}%</td>
           </tr>
           <tr>
-            <th scope="row">Turg</th>
+            <th class="tableBorders" scope="row">Turg</th>
             <td>{{ searchResult.exchange }}</td>
           </tr>
           </tbody>
         </table>
-      </div>
 
     </div>
+
     <div class="row">
       <div class="col-6">
         <div class="input-group">
@@ -45,27 +38,30 @@
       </div>
     </div>
     <div>
-      <div>
+      <div class="col-lg-5 offset-3">
         <div class="d-inline-flex">
-          <p1 class="priceLabel">Hind</p1>
+          <p1 class="priceLabel">Ülemine piirhind </p1>
           <input v-model="watchlistRequest.priceLower" type="text" class="form-control inputBoxes">
         </div>
       </div>
     </div>
     <div>
-      <div>
+      <div class="col-lg-5 offset-3">
         <div class="d-inline-flex">
-          <p1 class="priceLabel">Hind</p1>
+          <p1 class="priceLabel">Alumine piirhind</p1>
           <input v-model="watchlistRequest.priceHigher" type="text" class="form-control inputBoxes">
         </div>
       </div>
     </div>
-    <div class="row">
-      <div>
-        <div class="submitButton mb-5">
+
+    <div>
+      <ErrorAlert :message="message"/>
+    </div>
+
+    <div class="col-2 offset-4">
+        <div class="submitButton">
           <button v-on:click="addToWatchlist" class="btn btn-dark" type="button">Lisa watchlisti</button>
         </div>
-      </div>
     </div>
   </div>
 
@@ -73,14 +69,16 @@
 
 <script>
 import Navbar from "@/components/navbars/Navbar";
+import ErrorAlert from "@/components/ErrorAlert";
 
 export default {
 
   name: "WatchlistAddView",
-  components: {Navbar},
+  components: {Navbar, ErrorAlert},
 
   data: function () {
     return {
+      message: '',
       watchlistRequest: {
         ticker: '',
         userId: Number( sessionStorage.getItem('userId')),
@@ -109,11 +107,9 @@ export default {
             }
           }
       ).then(response => {
-        console.log(response.data)
         this.searchResult = response.data
         this.watchlistRequest.ticker = this.searchResult.ticker
         this.watchlistRequest.priceAtAddition = this.searchResult.currentPrice
-
       }).catch(error => {
         console.log(error)
       })
@@ -124,10 +120,10 @@ export default {
     addToWatchlist: function () {
       this.$http.post("/watchlist", this.watchlistRequest
       ).then(response => {
-        console.log(response.data)
+        this.message = 'Instrument lisati sinu Watchlisti\'i'
         this.$router.push({name: 'watchListRoute'})
       }).catch(error => {
-        console.log(error)
+        this.message = error.response.data.message
       })
     },
   },

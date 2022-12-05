@@ -1,18 +1,18 @@
 .iconStyleDelete {
     cursor: pointer;
-    color: #9B2915;
+    color: #E10000;
     height: 20px;
 }
 
 .iconStyleEdit {
     cursor: pointer;
-    color: #50A2A7;
+    color: #1BB300;
     height: 20px;
 }
 
-.iconStyleEditBlack {
+.iconStyleEditWhite {
     cursor: pointer;
-    color: #000000;
+    color: #ffffff;
     height: 15px;
 }
 
@@ -40,8 +40,33 @@
 .searchTable {
     font-family: Calibri, sans-serif;
     font-size: 20px;
+    border-radius: 10px;
     margin-top: 10px;
     cursor: pointer;
+    color: white;
+    --bs-bg-opacity:0.80;
+    background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
+}
+
+.searchTableAdd {
+    font-family: Calibri, sans-serif;
+    font-size: 20px;
+    border-radius: 10px;
+    margin-top: 10px;
+    color: white;
+    --bs-bg-opacity:0.80;
+    background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
+}
+
+.tableBorders{
+    border-right: 1px solid #ffffff;
+}
+
+.watchlistTable {
+    border-radius: 10px;
+    color: white;
+    --bs-bg-opacity:0.85;
+    background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
 }
 
 .submitButton {
@@ -95,30 +120,12 @@
 }
 
 .checkButton {
-    color: darkgreen;
+    color: #1BB300;
     display: flex;
     cursor: pointer;
     height: 20px;
     margin-left: 5px;
     margin-top: 7px;
-}
-
-.watchlistTable {
-    border-radius: 10px;
-    border-color: #4249D9;
-
-    background-color: #83BEF5;
-    background-blend-mode: difference;
-
-}
-
-.watchlistTableHead{
-    font-family: Calibri, sans-serif;
-    font-size: 15px;
-    margin-top: 10px;
-    cursor: pointer;
-    border-radius: 10px;
-    border-color: #4249D9;
 }
 
 .alertBackground {

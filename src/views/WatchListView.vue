@@ -1,37 +1,36 @@
 <template>
 
-  <div class="container watchlistBackground">
+  <div class="container">
     <Navbar/>
     <div class="row">
       <div class="col">
-        <table class="table table-hover watchlistTable">
-          <thead class="">
+        <table class="table table-hover watchlistTable mt-3">
+          <thead>
           <tr>
-            <th v-on:mouseover="" v-on:click="sortBy('shortName')">Instrument  <font-awesome-icon class="iconStyleEditBlack" icon="fa-solid fa-sort" /> </th>
-            <th v-on:click="sortBy('currentPrice')">Hetkehind  <font-awesome-icon class="iconStyleEditBlack" icon="fa-solid fa-sort" /> </th>
-            <th v-on:click="sortBy('priceChangePercentage')">Muutus täna  <font-awesome-icon class="iconStyleEditBlack" icon="fa-solid fa-sort" /> </th>
-            <th v-on:click="sortBy('priceAtAddition')">Hind lisamisel  <font-awesome-icon class="iconStyleEditBlack" icon="fa-solid fa-sort" /> </th>
-            <th>Muutus lisamisest</th>
-            <th v-on:click="sortBy('priceHigher')">Ülemine piirhind  <font-awesome-icon class="iconStyleEditBlack" icon="fa-solid fa-sort" /> </th>
-            <th v-on:click="sortBy('priceLower')">Alumine piirhind  <font-awesome-icon class="iconStyleEditBlack" icon="fa-solid fa-sort" /> </th>
-            <th v-on:click="sortBy('userComment')">Kommentaar  <font-awesome-icon class="iconStyleEditBlack" icon="fa-solid fa-sort" /> </th>
-            <th v-on:click="sortBy('additionDate')">Lisamise kuupäev  <font-awesome-icon class="iconStyleEditBlack" icon="fa-solid fa-sort" /> </th>
+            <th class="tableBorders" v-on:mouseover="" v-on:click="sortBy('shortName')">Instrument  <font-awesome-icon class="iconStyleEditWhite" icon="fa-solid fa-sort" /> </th>
+            <th class="tableBorders" v-on:click="sortBy('currentPrice')">Hetkehind  <font-awesome-icon class="iconStyleEditWhite" icon="fa-solid fa-sort" /> </th>
+            <th class="tableBorders" v-on:click="sortBy('priceChangePercentage')">Muutus täna  <font-awesome-icon class="iconStyleEditWhite" icon="fa-solid fa-sort" /> </th>
+            <th class="tableBorders" v-on:click="sortBy('priceAtAddition')">Hind lisamisel  <font-awesome-icon class="iconStyleEditWhite" icon="fa-solid fa-sort" /> </th>
+            <th class="tableBorders">Muutus lisamisest</th>
+            <th class="tableBorders" v-on:click="sortBy('priceHigher')">Ülemine piirhind  <font-awesome-icon class="iconStyleEditWhite" icon="fa-solid fa-sort" /> </th>
+            <th class="tableBorders" v-on:click="sortBy('priceLower')">Alumine piirhind  <font-awesome-icon class="iconStyleEditWhite" icon="fa-solid fa-sort" /> </th>
+            <th class="tableBorders" v-on:click="sortBy('userComment')">Kommentaar  <font-awesome-icon class="iconStyleEditWhite" icon="fa-solid fa-sort" /> </th>
+            <th class="tableBorders" v-on:click="sortBy('additionDate')">Lisamise kuupäev  <font-awesome-icon class="iconStyleEditWhite" icon="fa-solid fa-sort" /> </th>
             <th>Lisainfo</th>
           </tr>
           </thead>
           <tbody>
           <tr v-for="response in sortedResponses">
-            <td> {{ response.shortName }}</td>
-            <td> {{ response.currentPrice }} {{ response.currency }}</td>
-            <td> {{ response.priceChangePercentage }} %</td>
-            <td> {{ response.priceAtAddition }}</td>
-            <td> {{ -(response.priceAtAddition - response.currentPrice) }} {{ response.currency }}</td>
-            <td> {{ response.priceHigher }} {{ response.currency }}</td>
-            <td> {{ response.priceLower }} {{ response.currency }}</td>
-            <td> {{ response.userComment }}</td>
-            <td> {{ response.additionDate }}</td>
-            <td><button class="btn-outline-dark btn justify-content-end" type="button">Lisainfo</button></td>
-
+            <td class="tableBorders"> {{ response.shortName }}</td>
+            <td class="tableBorders"> {{ response.currentPrice }} {{ response.currency }}</td>
+            <td class="tableBorders"> {{ response.priceChangePercentage }} %</td>
+            <td class="tableBorders"> {{ response.priceAtAddition }}</td>
+            <td class="tableBorders"> {{ -(response.priceAtAddition - response.currentPrice) }} {{ response.currency }}</td>
+            <td class="tableBorders"> {{ response.priceHigher }} {{ response.currency }}</td>
+            <td class="tableBorders"> {{ response.priceLower }} {{ response.currency }}</td>
+            <td class="tableBorders"> {{ response.userComment }}</td>
+            <td class="tableBorders"> {{ response.additionDate }}</td>
+            <td><button class="btn-outline-light btn justify-content-end" type="button">Lisainfo</button></td>
 
           </tr>
           </tbody>
