@@ -74,7 +74,6 @@ export default {
       if (s === this.currentSort) {
         this.currentSortDirection = this.currentSortDirection === 'asc' ? 'desc' : 'asc';
       }
-      // this.currentSort = s;
     },
     getUserId: function () {
       this.userId = sessionStorage.getItem('userId')
@@ -106,7 +105,7 @@ export default {
           return -1 * modifier;
         }
         if (a[this.currentSort] > b[this.currentSort]) {
-          return 1 * modifier;
+          return modifier;
         }
         return 0;
       })

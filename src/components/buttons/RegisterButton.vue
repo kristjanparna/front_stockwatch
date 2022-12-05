@@ -1,7 +1,7 @@
 <template>
   <div>
     <router-link to="/register">
-      <button type="button" class="btn btn-dark col-1 justify-content-center">
+      <button type="button" class="btn registerButton col-lg-4">
         Registreeri
       </button>
     </router-link>

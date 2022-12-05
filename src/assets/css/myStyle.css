@@ -30,8 +30,11 @@
     margin: 0;
     width: 100%;
     min-height: 100vh;
-    background-image: linear-gradient(45deg, #16C55B ,#F2F582, #16C55B);
-
+    background: url("highRes-logo.png") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 .searchTable {
@@ -46,6 +49,24 @@
     position: relative;
     right: 70px;
     opacity: 75%;
+}
+
+.loginButton {
+    --bs-btn-color: #fff;
+    --bs-btn-bg: #002851;
+    --bs-btn-border-color: #212529;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #424649;
+    --bs-btn-hover-border-color: #373b3e;
+}
+
+.registerButton {
+    --bs-btn-color: #fff;
+    --bs-btn-bg: #002851;
+    --bs-btn-border-color: #212529;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #424649;
+    --bs-btn-hover-border-color: #373b3e;
 }
 
 .inputBoxes {
@@ -100,6 +121,8 @@
     border-color: #4249D9;
 }
 
-.watchlistBackground {
-
+.alertBackground {
+    --bs-alert-color: #fff;
+    --bs-alert-bg: #EA6767;
+    --bs-alert-border-color: #f5c2c7;
 }
