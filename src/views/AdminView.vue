@@ -14,34 +14,16 @@
             <th scope="col">Perekonnanimi</th>
             <th scope="col">Email</th>
             <th scope="col">Registreerimise kuupäev</th>
-            <th scope="col"></th>
-            <th scope="col"></th>
           </tr>
           </thead>
           <tbody>
-          <tr v-for="user in userInfo" :key="user.name">
+          <tr v-for="user in userInfo" v-on:click="getDetailedUserInfo(user.username)">
             <th scope="row">{{ user.index }}</th>
             <td> {{ user.username }}</td>
             <td> {{ user.firstname }}</td>
             <td> {{ user.lastname }}</td>
             <td>{{ user.email }}</td>
             <td>{{ user.startDate }}</td>
-            <td>
-              <font-awesome-icon v-on:click="toggle = !toggle" icon="fa-solid fa-user-pen"
-                                 class="iconStyleEdit"/>
-              <div v-show="toggle" class="d-inline-flex">
-                <input v-show="toggle" v-model="email" type="text" class="form-control hiding" placeholder="email"
-                       aria-label="Username"
-                       aria-describedby="basic-addon1">
-                <font-awesome-icon v-show="toggle" v-on:click="editUserEmail(user.username)"
-                                   class="checkButton"
-                                   icon="fa-solid fa-circle-check"/>
-              </div>
-            </td>
-            <td>
-              <font-awesome-icon v-on:click="deleteUser(user.username)" icon="fa-solid fa-user-minus"
-                                 class="iconStyleDelete"/>
-            </td>
           </tr>
           </tbody>
         </table>
@@ -52,7 +34,6 @@
 
 <script>
 import NavbarAdmin from "@/components/navbars/NavbarAdmin";
-
 
 export default {
   name: "AdminView",
@@ -95,33 +76,10 @@ export default {
             console.log(error)
           })
     },
-    deleteUser: function (username) {
-      this.$http.put("/remove", null, {
-            params: {
-              username: username
-            }
-          }
-      ).then(response => {
-        console.log(response.data)
-      }).catch(error => {
-        console.log(error)
-      })
+    getDetailedUserInfo: function (username) {
+      sessionStorage.setItem('userQuery', username)
+      this.$router.push({path: '/user'})
     },
-    editUserEmail: function (username) {
-      this.$http.put("/userinfo", null, {
-            params: {
-              email: this.email,
-              username: username
-            }
-          }
-      ).then(response => {
-        console.log(response.data)
-      }).catch(error => {
-        console.log(error)
-      })
-    },
-
-
   },
   mounted() {
     this.getUserName()
