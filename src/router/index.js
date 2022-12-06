@@ -8,6 +8,7 @@ import HistoryView from "@/views/HistoryView";
 import AdminView from "@/views/AdminView";
 import SearchView from "@/views/SearchView";
 import WatchlistAddView from "@/views/WatchlistAddView";
+import AdminDetailedView from "@/views/AdminDetailedView";
 
 Vue.use(VueRouter)
 
@@ -51,6 +52,11 @@ const routes = [
     path: '/watchlist/add',
     name : 'watchlistAddRoute',
     component: WatchlistAddView
+  },
+  {
+    path: '/user',
+    name: 'adminDetailedRoute',
+    component: AdminDetailedView
   }
 ]
 

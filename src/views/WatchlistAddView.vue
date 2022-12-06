@@ -34,36 +34,59 @@
           </tbody>
         </table>
       </div>
-
-    </div>
-    <div class="row">
-      <div class="col-6">
-        <div class="input-group">
-          <textarea v-model="watchlistRequest.userComment" class="form-control" aria-label="With textarea"
-                    placeholder="Sisesta kommentaar"></textarea>
+      <div>
+        <div>
+          <div class="addToListButton">
+            <div>
+              <button v-on:click="watchlistToggle = !watchlistToggle" type="button" class="btn btn-dark col-2">Lisa
+                jälgimisnimekirja
+              </button>
+              <button type="button" class="btn btn-dark  ms-2 col-2">Lisa portfelli</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
     <div>
-      <div>
-        <div class="d-inline-flex">
-          <p1 class="priceLabel">Hind</p1>
-          <input v-model="watchlistRequest.priceLower" type="text" class="form-control inputBoxes">
-        </div>
-      </div>
+      <AddToWatchlist v-show="watchlistToggle" :add-to-watchlist="addToWatchlist"
+                      :watchlist-request="watchlistRequest"/>
     </div>
     <div>
-      <div>
-        <div class="d-inline-flex">
-          <p1 class="priceLabel">Hind</p1>
-          <input v-model="watchlistRequest.priceHigher" type="text" class="form-control inputBoxes">
+      <div class="mt-1">
+      </div>
+      <div class="row">
+        <div class="col-3">
+          <div class="d-inline-flex">
+            <p1>Kogus</p1>
+            <input v-model="portfolioRequest.amount" type="text" class="form-control d-inline">
+          </div>
         </div>
       </div>
-    </div>
-    <div class="row">
-      <div>
-        <div class="submitButton mb-5">
-          <button v-on:click="addToWatchlist" class="btn btn-dark" type="button">Lisa watchlisti</button>
+      <div class="row">
+        <div class="col-3">
+          <div class="d-inline-flex">
+            <div>
+              <p1>Hind</p1>
+            </div>
+            <div class="d-inline">
+              <input v-model="portfolioRequest.purchasePrice" type="text" class="form-control">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-3">
+          <div class="d-inline-flex">
+            <p1>Tehingutasu</p1>
+            <input v-model="portfolioRequest.transactionFee" type="text" class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <div class="submitButton mb-5">
+            <button v-on:click="addToPortfolio" class="btn btn-dark" type="button">Lisa portfelli</button>
+          </div>
         </div>
       </div>
     </div>
@@ -71,22 +94,33 @@
 </template>
 <script>
 import Navbar from "@/components/navbars/Navbar";
+import AddToWatchlist from "@/components/inputs/AddToWatchlist";
 
 
 export default {
 
   name: "WatchlistAddView",
-  components: {Navbar},
+  components: {AddToWatchlist, Navbar},
 
   data: function () {
     return {
+      watchlistToggle: false,
+      portfolioToggle: false,
       watchlistRequest: {
         ticker: '',
-        userId: Number( sessionStorage.getItem('userId')),
+        userId: Number(sessionStorage.getItem('userId')),
         priceHigher: '',
         priceLower: '',
         userComment: '',
         priceAtAddition: '',
+      },
+      portfolioRequest: {
+        ticker: '',
+        userId: Number(sessionStorage.getItem('userId')),
+        amount: '',
+        transactionFee: '',
+        purchasePrice: '',
+        transactionTypeId: 1
       },
       symbol: '',
       searchResult: {
@@ -112,7 +146,7 @@ export default {
         this.searchResult = response.data
         this.watchlistRequest.ticker = this.searchResult.ticker
         this.watchlistRequest.priceAtAddition = this.searchResult.currentPrice
-
+        this.portfolioRequest.ticker = this.searchResult.ticker
       }).catch(error => {
         console.log(error)
       })
@@ -125,6 +159,14 @@ export default {
       ).then(response => {
         console.log(response.data)
         this.$router.push({name: 'watchListRoute'})
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+    addToPortfolio: function () {
+      this.$http.post("/portfolio", this.portfolioRequest
+      ).then(response => {
+        console.log(response.data)
       }).catch(error => {
         console.log(error)
       })

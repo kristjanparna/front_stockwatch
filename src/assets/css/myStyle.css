@@ -53,7 +53,7 @@
 .priceLabel {
     display: inline-block;
     position: relative;
-    right: 125px;
+    right: 175px;
     margin-top: 10px;
 }
 
@@ -74,4 +74,16 @@
     height: 20px;
     margin-left: 5px;
     margin-top: 7px;
+}
+
+.addToListButton {
+    margin-top: 10px;
+    position: relative;
+    right: 425px;
+    opacity: 75%;
+}
+
+.tableHover {
+    cursor: pointer;
+
 }

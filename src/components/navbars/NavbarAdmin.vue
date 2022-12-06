@@ -36,8 +36,8 @@
               </li>
             </ul>
             <form class="d-flex">
-              <input class="form-control me-2" type="search" placeholder="Otsi kasutajat" aria-label="Search">
-              <button class="btn btn-outline-light" type="submit">Search</button>
+              <input v-model="usernameQuery" class="form-control me-2" type="search" placeholder="Otsi kasutajat" aria-label="Search">
+              <button v-on:click="getDetailedUserInfo" class="btn btn-outline-light" type="submit">Search</button>
             </form>
           </div>
         </div>
@@ -55,7 +55,8 @@ export default {
   name: 'Navbar',
   data: function () {
     return {
-      username: ''
+      username: '',
+      usernameQuery: ''
     }
   },
   methods: {
@@ -64,6 +65,12 @@ export default {
     },
     clearSessionStorage: function () {
       sessionStorage.clear();
+    },
+    getDetailedUserInfo: function () {
+      sessionStorage.setItem('userQuery', this.usernameQuery);
+      this.$emit('getDetailedUserInfo')
+      this.$router.push({path: '/user'})
+
     },
   },
   mounted() {
