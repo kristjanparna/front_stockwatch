@@ -1,68 +1,70 @@
 <template>
   <div class="container">
     <Navbar/>
-      <div class="col-6">
-        <table class="table searchTableAdd">
-          <tbody>
-          <tr>
-            <th class="tableBorders" scope="row">Sümbol</th>
-            <td>{{ searchResult.ticker }}</td>
-          </tr>
-          <tr>
-            <th class="tableBorders" scope="row">Nimi</th>
-            <td>{{ searchResult.shortName }}</td>
-          </tr>
-          <tr>
-            <th class="tableBorders" scope="row">Hind</th>
-            <td>{{ searchResult.currentPrice }} {{ searchResult.currency }}</td>
-          </tr>
-          <tr>
-            <th class="tableBorders" scope="row">Muutus</th>
-            <td>{{ searchResult.priceChangePercentage }}%</td>
-          </tr>
-          <tr>
-            <th class="tableBorders" scope="row">Turg</th>
-            <td>{{ searchResult.exchange }}</td>
-          </tr>
-          </tbody>
-        </table>
+    <div class="col-6">
+      <table class="table searchTableAdd">
+        <tbody>
+        <tr>
+          <th class="tableBorders" scope="row">Sümbol</th>
+          <td>{{ searchResult.ticker }}</td>
+        </tr>
+        <tr>
+          <th class="tableBorders" scope="row">Nimi</th>
+          <td>{{ searchResult.shortName }}</td>
+        </tr>
+        <tr>
+          <th class="tableBorders" scope="row">Hind</th>
+          <td>{{ searchResult.currentPrice }} {{ searchResult.currency }}</td>
+        </tr>
+        <tr>
+          <th class="tableBorders" scope="row">Muutus</th>
+          <td>{{ searchResult.priceChangePercentage }}%</td>
+        </tr>
+        <tr>
+          <th class="tableBorders" scope="row">Turg</th>
+          <td>{{ searchResult.exchange }}</td>
+        </tr>
+        </tbody>
+      </table>
 
-    </div>
+      <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+        <option selected disabled>Lisa jälgimisse või portfelli</option>
+        <option value="addToWatchlist">Lisa jälgimisse</option>
+        <option value="addToPortfolio">Lisa portfelli</option>
+      </select>
 
-    <div class="row">
-      <div class="col-6">
-        <div class="input-group">
+      <div v-if="selectedOption = 'addToWacthlist'">
+        <div class="row">
+          <div class="input-group">
           <textarea v-model="watchlistRequest.userComment" class="form-control" aria-label="With textarea"
                     placeholder="Sisesta kommentaar"></textarea>
+          </div>
+        </div>
+        <div class="row justify-content-end offset-1">
+          <div class="d-inline-flex col-lg-4">
+            <p1 class="priceLabel">Ülemine piirhind</p1>
+            <input v-model="watchlistRequest.priceLower" type="text" class="form-control inputBoxes">
+          </div>
+        </div>
+        <div class="row justify-content-end offset-1">
+          <div class="d-inline-flex col-lg-4">
+            <p1 class="priceLabel">Alumine piirhind</p1>
+            <input v-model="watchlistRequest.priceHigher" type="text" class="form-control inputBoxes">
+          </div>
+        </div>
+        <div>
+          <ErrorAlert :message="message"/>
+        </div>
+        <div class="row justify-content-end">
+          <div class="submitButton col-lg-4">
+            <button v-on:click="addToWatchlist" class="btn btn-dark" type="button">Lisa watchlisti</button>
+          </div>
         </div>
       </div>
-    </div>
-    <div>
-      <div class="col-lg-5 offset-3">
-        <div class="d-inline-flex">
-          <p1 class="priceLabel">Ülemine piirhind </p1>
-          <input v-model="watchlistRequest.priceLower" type="text" class="form-control inputBoxes">
-        </div>
-      </div>
-    </div>
-    <div>
-      <div class="col-lg-5 offset-3">
-        <div class="d-inline-flex">
-          <p1 class="priceLabel">Alumine piirhind</p1>
-          <input v-model="watchlistRequest.priceHigher" type="text" class="form-control inputBoxes">
-        </div>
-      </div>
+
     </div>
 
-    <div>
-      <ErrorAlert :message="message"/>
-    </div>
 
-    <div class="col-2 offset-4">
-        <div class="submitButton">
-          <button v-on:click="addToWatchlist" class="btn btn-dark" type="button">Lisa watchlisti</button>
-        </div>
-    </div>
   </div>
 
 </template>
@@ -79,9 +81,10 @@ export default {
   data: function () {
     return {
       message: '',
+      selectedOption: '',
       watchlistRequest: {
         ticker: '',
-        userId: Number( sessionStorage.getItem('userId')),
+        userId: Number(sessionStorage.getItem('userId')),
         priceHigher: '',
         priceLower: '',
         userComment: '',
