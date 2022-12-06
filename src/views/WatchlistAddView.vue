@@ -27,13 +27,13 @@
         </tbody>
       </table>
 
-      <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+      <select v-model="selectedOption" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
         <option selected disabled>Lisa jälgimisse või portfelli</option>
-        <option value="addToWatchlist">Lisa jälgimisse</option>
+        <option v-on:click="changeSelectedOption" value="addToWatchlist">Lisa jälgimisse</option>
         <option value="addToPortfolio">Lisa portfelli</option>
       </select>
 
-      <div v-if="selectedOption = 'addToWacthlist'">
+      <div v-if="selectedOption = 'addToWatchlist'">
         <div class="row">
           <div class="input-group">
           <textarea v-model="watchlistRequest.userComment" class="form-control" aria-label="With textarea"
@@ -103,6 +103,9 @@ export default {
     }
   },
   methods: {
+    changeSelectedOption: function () {
+
+    },
     searchInstrument: function () {
       this.$http.get("/search", {
             params: {
