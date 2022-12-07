@@ -4,7 +4,7 @@
       <NavbarAdmin @getDetailedUserInfo="getDetailedUserInfo"/>
     </div>
     <div>
-      <table class="table searchTableAdd mt-5">
+      <table class="table userTable mt-5">
         <thead>
         <tr>
           <th scope="col">Kasutaja</th>
@@ -27,7 +27,7 @@
             <font-awesome-icon v-if="userInfo.username != 'admin'" v-on:click="toggle = !toggle" icon="fa-solid fa-user-pen"
                                class="iconStyleEdit"/>
             <div v-show="toggle" class="d-inline-flex">
-              <input v-show="toggle" v-model="email" type="text" class="form-control hiding" placeholder="uus email"
+              <input v-show="toggle" v-model="email" v-on:keydown.enter="editUserEmail(userInfo.username)" type="text" class="form-control hiding" placeholder="uus email"
                      aria-label="Username"
                      aria-describedby="basic-addon1">
               <font-awesome-icon  v-show="toggle" v-on:click="editUserEmail(userInfo.username)" class="checkButton"
@@ -97,6 +97,7 @@ export default {
       }).catch(error => {
         console.log(error)
       })
+      this.$router.push({path: "/admin"})
     },
     editUserEmail: function (username) {
       this.$http.put("/userinfo", null, {
@@ -111,6 +112,7 @@ export default {
       }).catch(error => {
         this.error.message = error.response.data.message
       })
+      this.$router.push({path: "/admin"})
     },
   },
   beforeMount() {
