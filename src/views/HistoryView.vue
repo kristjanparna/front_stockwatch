@@ -8,15 +8,15 @@
         <div class="col-3 mt-3 justify-content-sm-start">
           <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
             <input checked v-on:change="filterHistory" type="radio" class="btn-check" name="btnradio"
-                   id="btnradio1" autocomplete="off" >
+                   id="1" autocomplete="off" >
             <label class="btn btn-outline-dark submitButton" for="btnradio1">Kõik</label>
 
             <input v-on:change="filterHistory" type="radio" class="btn-check" name="btnradio"
-                   id="btnradio2" autocomplete="off">
+                   id="2" autocomplete="off">
             <label class="btn btn-outline-dark submitButton" for="btnradio2">Ost</label>
 
             <input v-on:change="filterHistory" type="radio" class="btn-check" name="btnradio"
-                   id="btnradio3" autocomplete="off">
+                   id="3" autocomplete="off">
             <label class="btn btn-outline-dark submitButton" for="btnradio3">Müük</label>
           </div>
         </div>
