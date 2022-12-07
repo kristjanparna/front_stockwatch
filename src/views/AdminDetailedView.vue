@@ -4,7 +4,7 @@
       <NavbarAdmin @getDetailedUserInfo="getDetailedUserInfo"/>
     </div>
     <div>
-      <table class="table mt-5">
+      <table class="table searchTableAdd mt-5">
         <thead>
         <tr>
           <th scope="col">Kasutaja</th>
