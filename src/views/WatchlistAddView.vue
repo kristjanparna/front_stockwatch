@@ -175,6 +175,7 @@ export default {
       }).catch(error => {
         this.message = error.response.data.message
       })
+      sessionStorage.removeItem('id')
     },
     addToPortfolio: function () {
       this.$http.post("/portfolio", this.portfolioRequest

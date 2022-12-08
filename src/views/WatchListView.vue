@@ -32,7 +32,6 @@
             <td class="tableBorders"> {{ response.additionDate }}</td>
             <td><button v-on:click="editWatchlist(response.ticker, response.id)" class="btn-outline-light btn justify-content-end text-nowrap" type="button">Lisa portfelli/muuda</button></td>
             <td><button v-on:click="removeFromWatchlist(response.ticker, response.id)" class="btn-outline-light btn justify-content-end" type="button">Eemalda</button></td>
-
           </tr>
           </tbody>
         </table>
@@ -103,7 +102,7 @@ export default {
           }
       ).then(response => {
         console.log(response.data)
-        // this.$router.go()
+        this.$router.go()
       }).catch(error => {
         console.log(error)
       })
