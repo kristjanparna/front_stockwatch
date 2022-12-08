@@ -93,10 +93,12 @@
         </div>
         <div class="row mt-3 offset-3">
           <div class="btn-success col-lg-6">
+            <button v-on:click="addToPortfolio" class="btn btn-success" type="button">Lisa portfelli</button>
             <button v-on:click="addToPortfolio" class="btn btn-dark submitButton" type="button">Lisa portfelli</button>
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </template>
@@ -115,19 +117,18 @@ export default {
       message: '',
       selectedOption: '',
       symbol: '',
-      buySellOption: '',
       watchlistRequest: {
         id: sessionStorage.getItem('id'),
         ticker: '',
         userId: sessionStorage.getItem('userId'),
-        priceHigher: '',
-        priceLower: '',
+        priceHigher: 0,
+        priceLower: 0,
         userComment: '',
-        priceAtAddition: '',
-        shortName: ''
+        shortName: '',
+        priceAtAddition: 0,
       },
       portfolioRequest: {
-        userId: sessionStorage.getItem('userId'),
+        userId: Number(sessionStorage.getItem('userId')),
         ticker: sessionStorage.getItem('symbol'),
         transactionPrice: 0,
         amount: 0,
@@ -148,6 +149,16 @@ export default {
     }
   },
   methods: {
+    addToPortfolio: function () {
+      this.$http.post("/portfolio", this.portfolioRequest
+      ).then(response => {
+        this.message = 'Instrument lisati sinu portfelli'
+        this.$router.push({name: 'portfolioRoute'})
+      }).catch(error => {
+        this.message = error.response.data.message
+      })
+    },
+
     searchInstrument: function () {
       this.$http.get("/search", {
             params: {
@@ -170,20 +181,12 @@ export default {
     addToWatchlist: function () {
       this.$http.post("/watchlist", this.watchlistRequest
       ).then(response => {
-        this.message = 'Instrument lisati sinu Watchlisti\'i'
+        this.message = 'Instrument lisati sinu Watchlist\'i'
         this.$router.push({name: 'watchListRoute'})
       }).catch(error => {
         this.message = error.response.data.message
       })
       sessionStorage.removeItem('id')
-    },
-    addToPortfolio: function () {
-      this.$http.post("/portfolio", this.portfolioRequest
-      ).then(response => {
-        console.log(response.data)
-      }).catch(error => {
-        console.log(error)
-      })
     },
   },
   beforeMount() {
