@@ -51,7 +51,7 @@
     margin-top: 10px;
     cursor: pointer;
     color: white;
-    --bs-bg-opacity: 0.80;
+    --bs-bg-opacity:0.80;
     background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
 }
 
@@ -61,19 +61,29 @@
     border-radius: 10px;
     margin-top: 10px;
     color: white;
-    --bs-bg-opacity: 0.80;
+    --bs-bg-opacity:0.80;
     background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
     cursor: pointer;
 }
 
-.tableBorders {
+.userTable {
+    font-family: Calibri, sans-serif;
+    font-size: 20px;
+    border-radius: 10px;
+    margin-top: 10px;
+    color: white;
+    --bs-bg-opacity:0.80;
+    background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
+}
+
+.tableBorders{
     border-right: 1px solid #ffffff;
 }
 
 .watchlistTable {
     border-radius: 10px;
     color: white;
-    --bs-bg-opacity: 0.85;
+    --bs-bg-opacity:0.85;
     background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
 }
 
@@ -138,6 +148,6 @@
 
 .alertBackground {
     --bs-alert-color: #fff;
-    --bs-alert-bg: #FF0000;
+    --bs-alert-bg: #EA6767;
     --bs-alert-border-color: #f5c2c7;
 }
