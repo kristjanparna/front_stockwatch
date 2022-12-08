@@ -1,72 +1,108 @@
 <template>
   <div class="container">
     <Navbar/>
-    <div class="col-6">
-      <table class="table searchTableAdd">
-        <tbody>
-        <tr>
-          <th class="tableBorders" scope="row">Sümbol</th>
-          <td>{{ searchResult.ticker }}</td>
-        </tr>
-        <tr>
-          <th class="tableBorders" scope="row">Nimi</th>
-          <td>{{ searchResult.shortName }}</td>
-        </tr>
-        <tr>
-          <th class="tableBorders" scope="row">Hind</th>
-          <td>{{ searchResult.currentPrice }} {{ searchResult.currency }}</td>
-        </tr>
-        <tr>
-          <th class="tableBorders" scope="row">Muutus</th>
-          <td>{{ searchResult.priceChangePercentage }}%</td>
-        </tr>
-        <tr>
-          <th class="tableBorders" scope="row">Turg</th>
-          <td>{{ searchResult.exchange }}</td>
-        </tr>
-        </tbody>
-      </table>
+    <div class="row">
+      <div class="col-6">
+        <table class="table searchTableAdd">
+          <tbody>
+          <tr>
+            <th class="tableBorders" scope="row">Sümbol</th>
+            <td>{{ searchResult.ticker }}</td>
+          </tr>
+          <tr>
+            <th class="tableBorders" scope="row">Nimi</th>
+            <td>{{ searchResult.shortName }}</td>
+          </tr>
+          <tr>
+            <th class="tableBorders" scope="row">Hind</th>
+            <td>{{ searchResult.currentPrice }} {{ searchResult.currency }}</td>
+          </tr>
+          <tr>
+            <th class="tableBorders" scope="row">Muutus</th>
+            <td>{{ searchResult.priceChangePercentage }}%</td>
+          </tr>
+          <tr>
+            <th class="tableBorders" scope="row">Turg</th>
+            <td>{{ searchResult.exchange }}</td>
+          </tr>
+          </tbody>
+        </table>
 
-      <select v-model="selectedOption" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-        <option selected disabled>Lisa jälgimisse või portfelli</option>
-        <option v-on:click="changeSelectedOption" value="addToWatchlist">Lisa jälgimisse</option>
-        <option value="addToPortfolio">Lisa portfelli</option>
-      </select>
+        <select v-model="selectedOption" class="form-select mt-3 "
+                aria-label="Default select example">
+          <option selected disabled :value="0"> Lisa jälgimisse või portfelli</option>
+          <option :value=1> Lisa watchlisti</option>
+          <option :value=2> Lisa portfelli</option>
+        </select>
+      </div>
 
-      <div v-if="selectedOption = 'addToWatchlist'">
-        <div class="row">
+      <div v-if="selectedOption === 1" class="col col-5">
+        <div class="row mt-3">
           <div class="input-group">
           <textarea v-model="watchlistRequest.userComment" class="form-control" aria-label="With textarea"
                     placeholder="Sisesta kommentaar"></textarea>
           </div>
         </div>
-        <div class="row justify-content-end offset-1">
-          <div class="d-inline-flex col-lg-4">
-            <p1 class="priceLabel">Ülemine piirhind</p1>
-            <input v-model="watchlistRequest.priceLower" type="text" class="form-control inputBoxes">
+        <div class="row mt-3 offset-3">
+          <div class="d-inline-flex">
+            <p1 class="priceLabel textBackground col-4">Ülemine piirhind</p1>
+            <input v-model="watchlistRequest.priceLower" type="number" class="form-control inputBoxes">
           </div>
         </div>
-        <div class="row justify-content-end offset-1">
-          <div class="d-inline-flex col-lg-4">
-            <p1 class="priceLabel">Alumine piirhind</p1>
-            <input v-model="watchlistRequest.priceHigher" type="text" class="form-control inputBoxes">
+        <div class="row mt-3 offset-3">
+          <div class="d-inline-flex">
+            <p1 class="priceLabel textBackground col-4">Alumine piirhind</p1>
+            <input v-model="watchlistRequest.priceHigher" type="number" class="form-control inputBoxes">
           </div>
         </div>
-        <div>
+        <div class="mt-3">
           <ErrorAlert :message="message"/>
         </div>
-        <div class="row justify-content-end">
-          <div class="submitButton col-lg-4">
-            <button v-on:click="addToWatchlist" class="btn btn-dark" type="button">Lisa watchlisti</button>
+        <div class="row mt-3 offset-3">
+          <div class="btn-success col-lg-6">
+            <button v-on:click="addToWatchlist" class="btn btn-success" type="button">Lisa watchlisti</button>
           </div>
         </div>
       </div>
 
+      <div v-if="selectedOption === 2" class="col col-5">
+        <div class="row mt-3 offset-3">
+          <div class="d-inline-flex">
+            <p1 class="priceLabel textBackground col-4">Instrumendi hind</p1>
+            <input v-model="portfolioRequest.purchasePrice" type="number" class="form-control inputBoxes">
+          </div>
+        </div>
+        <div class="row mt-3 offset-3">
+          <div class="d-inline-flex">
+            <p1 class="priceLabel textBackground col-4">Kogus</p1>
+            <input v-model="portfolioRequest.amount" type="number" class="form-control inputBoxes">
+          </div>
+        </div>
+        <div class="row mt-3 offset-3">
+          <div class="d-inline-flex">
+            <p1 class="priceLabel textBackground col-4">Tehingutasu</p1>
+            <input v-model="portfolioRequest.transactionFee" type="number" class="form-control inputBoxes">
+          </div>
+        </div>
+        <div class="row mt-3 offset-3">
+          <div class="d-inline-flex">
+            <p1 class="priceLabel textBackground col-4">Kuupäev</p1>
+            <input v-model="portfolioRequest.transactionDate" type="date" class="form-control inputBoxes">
+          </div>
+        </div>
+        <div class="mt-3">
+          <ErrorAlert :message="message"/>
+        </div>
+        <div class="row mt-3 offset-3">
+          <div class="btn-success col-lg-6">
+            <button v-on:click="addToWatchlist" class="btn btn-success" type="button">Lisa portfelli</button>
+          </div>
+        </div>
+      </div>
+
+
     </div>
-
-
   </div>
-
 </template>
 
 <script>
@@ -82,15 +118,25 @@ export default {
     return {
       message: '',
       selectedOption: '',
+      symbol: '',
+      buySellOption: '',
       watchlistRequest: {
         ticker: '',
-        userId: Number(sessionStorage.getItem('userId')),
+        userId: sessionStorage.getItem('userId'),
         priceHigher: '',
         priceLower: '',
         userComment: '',
         priceAtAddition: '',
       },
-      symbol: '',
+      portfolioRequest: {
+        userId: sessionStorage.getItem('userId'),
+        ticker: sessionStorage.getItem('symbol'),
+        purchasePrice: 0,
+        amount: 0,
+        transactionFee: 0,
+        transactionDate: '',
+        transactionTypeId: 0
+      },
       searchResult: {
         ticker: '',
         exchange: '',
@@ -103,9 +149,6 @@ export default {
     }
   },
   methods: {
-    changeSelectedOption: function () {
-
-    },
     searchInstrument: function () {
       this.$http.get("/search", {
             params: {
