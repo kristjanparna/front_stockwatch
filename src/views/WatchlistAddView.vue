@@ -69,7 +69,7 @@
         <div class="row mt-3 offset-3">
           <div class="d-inline-flex">
             <p1 class="priceLabel textBackground col-4">Instrumendi hind</p1>
-            <input v-model="portfolioRequest.purchasePrice" type="number" class="form-control inputBoxes">
+            <input v-model="portfolioRequest.transactionPrice" type="number" class="form-control inputBoxes">
           </div>
         </div>
         <div class="row mt-3 offset-3">
@@ -95,11 +95,10 @@
         </div>
         <div class="row mt-3 offset-3">
           <div class="btn-success col-lg-6">
-            <button v-on:click="addToWatchlist" class="btn btn-success" type="button">Lisa portfelli</button>
+            <button v-on:click="addToPortfolio" class="btn btn-success" type="button">Lisa portfelli</button>
           </div>
         </div>
       </div>
-
 
     </div>
   </div>
@@ -119,23 +118,22 @@ export default {
       message: '',
       selectedOption: '',
       symbol: '',
-      buySellOption: '',
       watchlistRequest: {
         ticker: '',
         userId: sessionStorage.getItem('userId'),
-        priceHigher: '',
-        priceLower: '',
+        priceHigher: 0,
+        priceLower: 0,
         userComment: '',
-        priceAtAddition: '',
+        priceAtAddition: 0,
       },
       portfolioRequest: {
-        userId: sessionStorage.getItem('userId'),
+        userId: Number(sessionStorage.getItem('userId')),
         ticker: sessionStorage.getItem('symbol'),
-        purchasePrice: 0,
+        transactionPrice: 0,
         amount: 0,
         transactionFee: 0,
         transactionDate: '',
-        transactionTypeId: 0
+        transactionTypeId: 1
       },
       searchResult: {
         ticker: '',
@@ -149,6 +147,16 @@ export default {
     }
   },
   methods: {
+    addToPortfolio: function () {
+      this.$http.post("/portfolio", this.portfolioRequest
+      ).then(response => {
+        this.message = 'Instrument lisati sinu portfelli'
+        this.$router.push({name: 'portfolioRoute'})
+      }).catch(error => {
+        this.message = error.response.data.message
+      })
+    },
+
     searchInstrument: function () {
       this.$http.get("/search", {
             params: {
@@ -169,7 +177,7 @@ export default {
     addToWatchlist: function () {
       this.$http.post("/watchlist", this.watchlistRequest
       ).then(response => {
-        this.message = 'Instrument lisati sinu Watchlisti\'i'
+        this.message = 'Instrument lisati sinu Watchlist\'i'
         this.$router.push({name: 'watchListRoute'})
       }).catch(error => {
         this.message = error.response.data.message

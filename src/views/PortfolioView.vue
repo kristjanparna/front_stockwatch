@@ -22,57 +22,30 @@
             <th class="tableBorders">Muutus
               <font-awesome-icon class="iconStyleEditWhite" icon="fa-solid fa-sort"/>
             </th>
-            <th>Kasum/Kahjum
+            <th class="tableBorders">Kasum/Kahjum
               <font-awesome-icon class="iconStyleEditWhite" icon="fa-solid fa-sort"/>
             </th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr>
-            <td class="tableBorders"> TSLA</td>
-            <td class="tableBorders"> 40</td>
-            <td class="tableBorders"> 4 USD</td>
-            <td class="tableBorders"> 34.90 USD</td>
-            <td class="tableBorders"> 20.89 USD</td>
-            <td class="tableBorders"> -46 %</td>
-            <td> - 38.9 USD</td>
-          </tr>
-          <tr>
-            <td class="tableBorders"> AMZN</td>
-            <td class="tableBorders"> 50</td>
-            <td class="tableBorders"> 5 USD</td>
-            <td class="tableBorders"> 34.90 USD</td>
-            <td class="tableBorders"> 20.89 USD</td>
-            <td class="tableBorders"> -46 %</td>
-            <td> - 38.9 USD</td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="col-3">
-        <table class="table table-hover watchlistTable mt-3">
-          <thead>
-          <tr>
             <th></th>
-            <th> Tee midagi</th>
             <th></th>
           </tr>
           </thead>
           <tbody>
-          <tr>
+          <tr  v-for="response in responses" :key="response.ticker">
+            <td class="tableBorders"> {{ response.ticker }}</td>
+            <td class="tableBorders"> {{ response.amount }}</td>
+            <td class="tableBorders"> {{response.transactionFee}}</td>
+            <td class="tableBorders"> {{ response.avgBuyingPrice }}</td>
+            <td class="tableBorders"> {{response.currentPrice}}</td>
+            <td class="tableBorders"> {{ response.priceChangePercentage }}</td>
+            <td class="tableBorders"> {{ response.earning }}</td>
             <td>
-              <button class="btn-outline-light btn justify-content-end" type="button">Lisa</button>
+              <button v-on:click="setTicker(response.ticker)" type="button" class="btn btn-outline-light">Osta</button>
             </td>
             <td>
-              <button class="btn-outline-light btn justify-content-end" type="button">Müü</button>
-            </td>
-            <td>
-              <button class="btn-outline-light btn justify-content-end" type="button">Info</button>
+              <button v-on:click="setTicker(response.ticker)" type="button" class="btn btn-outline-light">Müü</button>
             </td>
           </tr>
           </tbody>
-
         </table>
       </div>
 
@@ -89,28 +62,30 @@ export default {
   components: {Navbar},
   data: function () {
     return {
-      userId: '',
+      userId: sessionStorage.getItem('userId'),
       ticker: '',
       responses: [
         {
           ticker: '',
           amount: 0,
           transactionFee: 0,
-          price: 0,
+          avgBuyingPrice: 0,
           currentPrice: 0,
           priceChangePercentage: 0,
           earning: 0,
         }
-      ]
+      ],
     }
   },
   methods: {
     getUserId: function () {
       this.userId = sessionStorage.getItem('userId')
     },
-    setTicker: function () {
+    setTicker: function (ticker) {
+      this.ticker = ticker;
       sessionStorage.setItem('ticker', this.ticker);
     },
+
   },
   mounted() {
     this.getUserId()
