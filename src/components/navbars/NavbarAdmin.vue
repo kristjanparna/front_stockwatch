@@ -22,12 +22,12 @@
                   </li>
                   <li class="nav-item">
                     <router-link to="/admin">
-                      <a class="nav-link active" aria-current="page" href="#">Statistika</a>
+                      <a class="nav-link disabled" aria-current="page" href="#">Statistika</a>
                     </router-link>
                   </li>
                   <li class="nav-item">
                     <router-link to="/admin">
-                      <a class="nav-link active" aria-current="page" href="#">Müü andmeid</a>
+                      <a class="nav-link disabled" aria-current="page" href="#">Müü andmeid</a>
                     </router-link>
                   <li class="nav-item">
                     <router-link to="/">
