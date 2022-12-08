@@ -9,6 +9,9 @@
             <th class="tableBorders">Nimi
               <font-awesome-icon class="iconStyleEditWhite" icon="fa-solid fa-sort"/>
             </th>
+            <th class="tableBorders">Ticker
+              <font-awesome-icon class="iconStyleEditWhite" icon="fa-solid fa-sort"/>
+            </th>
             <th class="tableBorders">Kogus
               <font-awesome-icon class="iconStyleEditWhite" icon="fa-solid fa-sort"/>
             </th>
@@ -22,7 +25,7 @@
             <th class="tableBorders">Muutus
               <font-awesome-icon class="iconStyleEditWhite" icon="fa-solid fa-sort"/>
             </th>
-            <th class="tableBorders">Kasum/Kahjum
+            <th class="tableBorders">Kasum
               <font-awesome-icon class="iconStyleEditWhite" icon="fa-solid fa-sort"/>
             </th>
             <th></th>
@@ -30,20 +33,36 @@
           </tr>
           </thead>
           <tbody>
-          <tr  v-for="response in responses" :key="response.ticker">
+          <tr v-for="response in responses" :key="response.ticker">
+            <td class="tableBorders"> {{ response.shortName }}</td>
             <td class="tableBorders"> {{ response.ticker }}</td>
-            <td class="tableBorders"> {{ response.amount }}</td>
-            <td class="tableBorders"> {{response.transactionFee}}</td>
-            <td class="tableBorders"> {{ response.avgBuyingPrice }}</td>
-            <td class="tableBorders"> {{response.currentPrice}}</td>
-            <td class="tableBorders"> {{ response.priceChangePercentage }}</td>
-            <td class="tableBorders"> {{ response.earning }}</td>
+            <td class="tableBorders"> {{ response.totalAmount }}</td>
+            <td class="tableBorders"> {{ response.totalTransactionFee }} €</td>
+            <td class="tableBorders"> {{ response.avgBuyingPrice }} €</td>
+            <td class="tableBorders"> {{ response.currentPrice }} €</td>
+            <td class="tableBorders"> {{ response.priceChangePercentage }} %</td>
+            <td class="tableBorders"> {{ response.earning }} €</td>
             <td>
               <button v-on:click="setTicker(response.ticker)" type="button" class="btn btn-outline-light">Osta</button>
             </td>
             <td>
               <button v-on:click="setTicker(response.ticker)" type="button" class="btn btn-outline-light">Müü</button>
             </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="col-3">
+        <table class="table table-hover watchlistTable mt-3">
+          <thead>
+          <tr>
+            <th>Sinu portfelli väärtus: </th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td> {{ totalEarnings }}</td>
           </tr>
           </tbody>
         </table>
@@ -64,11 +83,13 @@ export default {
     return {
       userId: sessionStorage.getItem('userId'),
       ticker: '',
+      totalEarnings: 0,
       responses: [
         {
           ticker: '',
-          amount: 0,
-          transactionFee: 0,
+          shortName: '',
+          totalAmount: 0,
+          totalTransactionFee: 0,
           avgBuyingPrice: 0,
           currentPrice: 0,
           priceChangePercentage: 0,
@@ -78,6 +99,13 @@ export default {
     }
   },
   methods: {
+    getTotalEarnings: function () {
+      let i = 0;
+      while (i < this.responses.length) {
+        this.totalEarnings = this.totalEarnings + this.responses[i].earning;
+        i++;
+      }
+    },
     getUserId: function () {
       this.userId = sessionStorage.getItem('userId')
     },
@@ -85,10 +113,22 @@ export default {
       this.ticker = ticker;
       sessionStorage.setItem('ticker', this.ticker);
     },
-
+    getPortfolioData: function () {
+      this.$http.get("/portfolio", {
+        params: {
+          userId: this.userId
+        }
+      }).then(response => {
+        this.responses = response.data;
+      }).catch(error => {
+        console.log(error)
+      })
+    },
   },
   mounted() {
-    this.getUserId()
+    this.getUserId();
+    this.getPortfolioData();
+    this.getTotalEarnings();
   }
 }
 </script>
