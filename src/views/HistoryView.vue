@@ -46,11 +46,13 @@
             <th class="tableBorders">Ühiku hind</th>
             <th class="tableBorders">Tehingutasu</th>
             <th class="tableBorders">Tehingu hind kokku</th>
-            <th class="tableBorders">Kuupäev</th>
+            <th class="tableBorders" v-on:click="sortBy('transactionDate')">Kuupäev
+              <font-awesome-icon class="iconStyleEditWhite" icon="fa-solid fa-sort"/>
+            </th>
           </tr>
           </thead>
           <tbody>
-          <tr v-for="response in responseBody">
+          <tr v-for="response in sortedResponses">
             <td class="tableBorders"> {{ response.portfolioInstrumentTicker }}</td>
             <td class="tableBorders" v-if="response.transactionTypeId == 1">Ost</td>
             <td class="tableBorders" v-else>Müük</td>
@@ -58,7 +60,7 @@
             <td class="tableBorders"> {{ response.price }}</td>
             <td class="tableBorders"> {{ response.transactionFee }}</td>
             <td class="tableBorders"> {{ (response.price * response.amount) + response.transactionFee }}</td>
-            <td class="tableBorders"> {{ response.date }}</td>
+            <td class="tableBorders"> {{ response.transactionDate }}</td>
           </tr>
           </tbody>
         </table>
@@ -80,13 +82,15 @@ export default {
       userId: '',
       startDate: '',
       endDate: '',
+      currentSort: '',
+      currentSortDirection: 'asc',
       responseBody: [
         {
           portfolioInstrumentTicker: '',
           transactionTypeId: 0,
           amount: 0,
           price: 0,
-          date: '',
+          transactionDate: '',
           transactionFee: 0
         }
       ],
@@ -95,6 +99,12 @@ export default {
   methods: {
     getUserId: function () {
       this.userId = sessionStorage.getItem('userId')
+    },
+    sortBy: function (s) {
+      this.currentSort = s;
+      if (s === this.currentSort) {
+        this.currentSortDirection = this.currentSortDirection === 'asc' ? 'desc' : 'asc';
+      }
     },
     getTransactionHistory: function (id) {
       let transactionTypeId = 0;
@@ -130,6 +140,23 @@ export default {
   },
   mounted() {
     this.getUserId()
+  },
+  computed:{
+    sortedResponses:function () {
+      return this.responseBody.sort((a, b) => {
+        let modifier = 1;
+        if (this.currentSortDirection === 'desc') {
+          modifier = -1;
+        }
+        if (a[this.currentSort] < b[this.currentSort]) {
+          return -1 * modifier;
+        }
+        if (a[this.currentSort] > b[this.currentSort]) {
+          return modifier;
+        }
+        return 0;
+      })
+    }
   },
   beforeMount() {
     this.getTransactionHistory()

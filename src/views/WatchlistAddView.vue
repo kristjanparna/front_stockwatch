@@ -35,7 +35,6 @@
           <option :value=2> Lisa portfelli</option>
         </select>
       </div>
-
       <div v-if="selectedOption === 1" class="col col-5">
         <div class="row mt-3">
           <div class="input-group">
@@ -60,16 +59,15 @@
         </div>
         <div class="row mt-3 offset-3">
           <div class="btn-success col-lg-6">
-            <button v-on:click="addToWatchlist" class="btn btn-success" type="button">Lisa watchlisti</button>
+            <button v-on:click="addToWatchlist" class="btn btn-dark submitButton" type="button">Lisa watchlisti</button>
           </div>
         </div>
       </div>
-
       <div v-if="selectedOption === 2" class="col col-5">
         <div class="row mt-3 offset-3">
           <div class="d-inline-flex">
             <p1 class="priceLabel textBackground col-4">Instrumendi hind</p1>
-            <input v-model="portfolioRequest.purchasePrice" type="number" class="form-control inputBoxes">
+            <input v-model="portfolioRequest.transactionPrice" type="number" class="form-control inputBoxes">
           </div>
         </div>
         <div class="row mt-3 offset-3">
@@ -95,12 +93,10 @@
         </div>
         <div class="row mt-3 offset-3">
           <div class="btn-success col-lg-6">
-            <button v-on:click="addToWatchlist" class="btn btn-success" type="button">Lisa portfelli</button>
+            <button v-on:click="addToPortfolio" class="btn btn-dark submitButton" type="button">Lisa portfelli</button>
           </div>
         </div>
       </div>
-
-
     </div>
   </div>
 </template>
@@ -121,21 +117,24 @@ export default {
       symbol: '',
       buySellOption: '',
       watchlistRequest: {
+        id: sessionStorage.getItem('id'),
         ticker: '',
         userId: sessionStorage.getItem('userId'),
         priceHigher: '',
         priceLower: '',
         userComment: '',
         priceAtAddition: '',
+        shortName: ''
       },
       portfolioRequest: {
         userId: sessionStorage.getItem('userId'),
         ticker: sessionStorage.getItem('symbol'),
-        purchasePrice: 0,
+        transactionPrice: 0,
         amount: 0,
         transactionFee: 0,
         transactionDate: '',
-        transactionTypeId: 0
+        transactionTypeId: 1,
+        shortName: ''
       },
       searchResult: {
         ticker: '',
@@ -159,6 +158,8 @@ export default {
         this.searchResult = response.data
         this.watchlistRequest.ticker = this.searchResult.ticker
         this.watchlistRequest.priceAtAddition = this.searchResult.currentPrice
+        this.watchlistRequest.shortName = this.searchResult.shortName
+        this.portfolioRequest.shortName = this.searchResult.shortName
       }).catch(error => {
         console.log(error)
       })
@@ -173,6 +174,14 @@ export default {
         this.$router.push({name: 'watchListRoute'})
       }).catch(error => {
         this.message = error.response.data.message
+      })
+    },
+    addToPortfolio: function () {
+      this.$http.post("/portfolio", this.portfolioRequest
+      ).then(response => {
+        console.log(response.data)
+      }).catch(error => {
+        console.log(error)
       })
     },
   },

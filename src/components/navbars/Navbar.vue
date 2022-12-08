@@ -27,11 +27,6 @@
                     </router-link>
                   </li>
                   <li class="nav-item">
-                    <router-link to="/portfolio">
-                      <a class="nav-link active" aria-current="page" href="#">Ost & Müük</a>
-                    </router-link>
-                  </li>
-                  <li class="nav-item">
                     <router-link to="/history">
                       <a class="nav-link active" aria-current="page" href="#">Ajalugu</a>
                     </router-link>

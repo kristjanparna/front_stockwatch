@@ -1,10 +1,9 @@
 <template>
-
   <div class="container">
     <Navbar/>
     <div class="row">
       <div class="col">
-        <table class="table table-hover watchlistTable mt-3">
+        <table class="table watchlistTable mt-3">
           <thead>
           <tr>
             <th class="tableBorders" v-on:mouseover="" v-on:click="sortBy('shortName')">Instrument  <font-awesome-icon class="iconStyleEditWhite" icon="fa-solid fa-sort" /> </th>
@@ -16,7 +15,8 @@
             <th class="tableBorders" v-on:click="sortBy('priceLower')">Alumine piirhind  <font-awesome-icon class="iconStyleEditWhite" icon="fa-solid fa-sort" /> </th>
             <th class="tableBorders" v-on:click="sortBy('userComment')">Kommentaar  <font-awesome-icon class="iconStyleEditWhite" icon="fa-solid fa-sort" /> </th>
             <th class="tableBorders" v-on:click="sortBy('additionDate')">Lisamise kuupäev  <font-awesome-icon class="iconStyleEditWhite" icon="fa-solid fa-sort" /> </th>
-            <th>Lisainfo</th>
+            <th></th>
+            <th></th>
           </tr>
           </thead>
           <tbody>
@@ -30,7 +30,8 @@
             <td class="tableBorders"> {{ response.priceLower }} {{ response.currency }}</td>
             <td class="tableBorders"> {{ response.userComment }}</td>
             <td class="tableBorders"> {{ response.additionDate }}</td>
-            <td><button class="btn-outline-light btn justify-content-end" type="button">Lisainfo</button></td>
+            <td><button v-on:click="editWatchlist(response.ticker, response.id)" class="btn-outline-light btn justify-content-end text-nowrap" type="button">Lisa portfelli/muuda</button></td>
+            <td><button v-on:click="removeFromWatchlist(response.ticker, response.id)" class="btn-outline-light btn justify-content-end" type="button">Eemalda</button></td>
 
           </tr>
           </tbody>
@@ -53,6 +54,7 @@ export default {
       currentSortDirection: 'asc',
       responses: [
         {
+          id: 0,
           ticker: '',
           shortName: '',
           currency: '',
@@ -91,6 +93,25 @@ export default {
     },
     navigateToInstrumentView: function () {
       // this.$router.push(name: 'InstrumentInfoRoute')
+    },
+    removeFromWatchlist: function (ticker, id) {
+      this.$http.delete("/watchlist", {
+            params: {
+              ticker: ticker,
+              id: id
+            }
+          }
+      ).then(response => {
+        console.log(response.data)
+        // this.$router.go()
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+    editWatchlist: function (ticker, id) {
+      sessionStorage.setItem('symbol', ticker)
+      sessionStorage.setItem('id', id)
+      this.$router.push({path: "/watchlist/add"})
     },
   },
   computed:{
