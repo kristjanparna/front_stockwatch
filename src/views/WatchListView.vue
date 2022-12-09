@@ -33,7 +33,7 @@
             <td class="tableBorders"> {{ response.additionDate }}</td>
             <div class="btn-group">
             <td><button v-on:click="addToPortfolioFromWatchlist(response.ticker, response.id)" class="btn-outline-light btn justify-content-end text-nowrap" type="button">Lisa portfelli</button></td>
-            <td><button v-on:click="toggle = !toggle" class="btn-outline-light btn justify-content-end text-nowrap" type="button">Muuda</button></td>
+            <td><button v-on:click="toggle = !toggle" class="btn-outline-light btn justify-content-end text-nowrap disabled" type="button">Muuda</button></td>
             <td><button v-on:click="removeFromWatchlist(response.ticker, response.id)" class="btn-outline-light btn justify-content-end" type="button">Eemalda</button></td>
             </div>
           </tr>
