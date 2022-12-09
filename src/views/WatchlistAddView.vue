@@ -93,7 +93,6 @@
         </div>
         <div class="row mt-3 offset-3">
           <div class="btn-success col-lg-6">
-            <button v-on:click="addToPortfolio" class="btn btn-success" type="button">Lisa portfelli</button>
             <button v-on:click="addToPortfolio" class="btn btn-dark submitButton" type="button">Lisa portfelli</button>
           </div>
         </div>
@@ -102,7 +101,6 @@
     </div>
   </div>
 </template>
-
 <script>
 import Navbar from "@/components/navbars/Navbar";
 import ErrorAlert from "@/components/ErrorAlert";

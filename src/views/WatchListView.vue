@@ -17,6 +17,7 @@
             <th class="tableBorders" v-on:click="sortBy('additionDate')">Lisamise kuupäev  <font-awesome-icon class="iconStyleEditWhite" icon="fa-solid fa-sort" /> </th>
             <th></th>
             <th></th>
+            <th></th>
           </tr>
           </thead>
           <tbody>
@@ -30,8 +31,11 @@
             <td class="tableBorders"> {{ response.priceLower }} {{ response.currency }}</td>
             <td class="tableBorders"> {{ response.userComment }}</td>
             <td class="tableBorders"> {{ response.additionDate }}</td>
-            <td><button v-on:click="editWatchlist(response.ticker, response.id)" class="btn-outline-light btn justify-content-end text-nowrap" type="button">Lisa portfelli/muuda</button></td>
+            <div class="btn-group">
+            <td><button v-on:click="addToPortfolioFromWatchlist(response.ticker, response.id)" class="btn-outline-light btn justify-content-end text-nowrap" type="button">Lisa portfelli</button></td>
+            <td><button v-on:click="toggle = !toggle" class="btn-outline-light btn justify-content-end text-nowrap" type="button">Muuda</button></td>
             <td><button v-on:click="removeFromWatchlist(response.ticker, response.id)" class="btn-outline-light btn justify-content-end" type="button">Eemalda</button></td>
+            </div>
           </tr>
           </tbody>
         </table>
@@ -48,6 +52,7 @@ export default {
   components: {Navbar},
   data: function () {
     return {
+      toggle: false,
       userId: '',
       currentSort: '',
       currentSortDirection: 'asc',
@@ -107,7 +112,7 @@ export default {
         console.log(error)
       })
     },
-    editWatchlist: function (ticker, id) {
+    addToPortfolioFromWatchlist: function (ticker, id) {
       sessionStorage.setItem('symbol', ticker)
       sessionStorage.setItem('id', id)
       this.$router.push({path: "/watchlist/add"})
